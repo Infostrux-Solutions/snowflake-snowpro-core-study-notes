@@ -1,4 +1,5 @@
 # Objects #
+All objecst in Snowflake are securable.
 
 ## Organization ##
 Top level securable object which serves as a logical grouping of Accounts.
@@ -10,7 +11,7 @@ Logical grouping of Databases.
 Logical grouping of Schemas.
 
 ## Schemas ##
-Logical grouping of Tables, Views, Stored Procedures, UDFs, Stages, File Formats, Pipes, Sequences, etc.
+Logical grouping of Tables, Views, Stored Procedures, UDFs, Stages, File Formats, Pipes, Sequences, Shares, etc.
 
 ## Tables ##
 
@@ -64,3 +65,6 @@ Named definition of a SQL query which can be queried as if it were a table.
 * Consumes background compute for the auto-refresh
   * The background compute does not require a customer-provided warehouse; Snowflake manages the compute
 * Secure materialized views are supported
+
+## Data Shares ##
+See [Data Sharing](DataSharing.md)

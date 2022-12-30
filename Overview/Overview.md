@@ -26,6 +26,7 @@ Snowflake is a data platform built for the cloud and delivered as a service.
   * Secure private data exchanges
 * Multi-cloud: AWS, Azure, GCP
 * Zero-Copy Cloning
+  * Objects that can be cloned: Databases, Schemas and Tables
   * Only metadata is copied
   * Once an object is cloned, the individual copies evolve separately and their storage increases only by the amount of data that was modified in each copy.
 
