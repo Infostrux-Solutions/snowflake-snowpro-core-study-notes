@@ -4,12 +4,12 @@
 Snowflake is a data platform built for the cloud and delivered as a service.
 
 ## Architecture ##
-* Services layer
+* [Cloud Services Layer](CloudServicesLayer.md)
 * Multi-Cluster Compute (Virtual Warehouses)
 * Centralized Storage - single copy and source of truth for the data
 * Cloud Agnosting Layer - allows Snowflake to run on the major cloud providers: AWS, Azure, GCP
 
-### Features ###
+## Features ##
 * ANSI SQL compliant OLAP data warehouse
 * Multi-cluser, shared data architecture
 * Self-tuning and self-healing
@@ -29,12 +29,12 @@ Snowflake is a data platform built for the cloud and delivered as a service.
   * Only metadata is copied
   * Once an object is cloned, the individual copies evolve separately and their storage increases only by the amount of data that was modified in each copy.
 
-#### Time Travel ####
+### Time Travel ###
 * Allows access previous versions of the data - the data in its state at a point of time in the past
 * A minimum of Enterprise edition required for time travel longer than 1 day, up to 90 days
 * The period of time travel can be set by database, schema or table
 
-#### Fail-Safe ####
+### Fail-Safe ###
 * A data backup feature
 * Snowflake admins can recover and restore data up to 7 days after the Time Travel period expires
 * Accessible only by contacting Snowflake support administrators
