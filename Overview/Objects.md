@@ -1,6 +1,8 @@
 # Objects #
 All objecst in Snowflake are securable.
 
+The definitions of most objects can be retrieved using the `GET_DDL()` function, see [GET_DDL()](https://docs.snowflake.com/en/sql-reference/functions/get_ddl.html).
+
 ## Organization ##
 Top level securable object which serves as a logical grouping of Accounts.
 

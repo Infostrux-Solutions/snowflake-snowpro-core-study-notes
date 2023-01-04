@@ -7,6 +7,10 @@
 * [Cloud Services Layer](Overview/CloudServicesLayer.md)
 * [Data Sharing](Overview/DataSharing.md)
 * [User Defined Functions](Overview/UserDefinedFunctions.md)
+* [Stored Procedures](Overview/StoredProcedures.md)
+
+## Virtual Warehouses ##
+* [Overview](VirtualWarehouses/Overview.md)
 
 ## Snowflake Account and Security ##
 * [DRAFT] [Access Control](AccessControl.md)
