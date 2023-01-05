@@ -10,7 +10,7 @@
 * [Stored Procedures](Overview/StoredProcedures.md)
 
 ## Virtual Warehouses ##
-* [Overview](VirtualWarehouses/Overview.md)
+* [Virtual Warehouses](VirtualWarehouses/VirtualWarehouses.md)
 
 ## Snowflake Account and Security ##
 * [DRAFT] [Access Control](AccessControl.md)
