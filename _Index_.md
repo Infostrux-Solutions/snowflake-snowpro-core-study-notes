@@ -12,5 +12,8 @@
 ## Virtual Warehouses ##
 * [Virtual Warehouses](VirtualWarehouses/VirtualWarehouses.md)
 
+## Snowflake Storage and Data Protection ##
+* [Data Storage Layer](StorageAndDataProtection/DataStorageLayer.md)
+
 ## Snowflake Account and Security ##
 * [DRAFT] [Access Control](AccessControl.md)
