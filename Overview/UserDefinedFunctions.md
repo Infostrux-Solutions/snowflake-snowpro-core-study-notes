@@ -1,6 +1,6 @@
 # User Defined Functions #
 
-Official Documentation: [User Defined Functions](https://docs.snowflake.com/en/sql-reference/user-defined-functions.html)
+> [User Defined Functions](https://docs.snowflake.com/en/sql-reference/user-defined-functions.html)
 
 User Defined Functions (UDFs) perform custom operations that are not available through the built-in functions.
 

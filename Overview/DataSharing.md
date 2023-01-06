@@ -1,4 +1,7 @@
 # Data Sharing #
+
+> [Introduction to Secure Data Sharing](https://docs.snowflake.com/en/user-guide/data-sharing-intro.html)
+
 * Shares are named Snowflake objects that encapsulate all of the information required to share a database
 * For each shared database, Snowflake supports using grants to provide granular access control to selected objects in the database:
   * Tables
@@ -42,6 +45,3 @@
 ## Types ##
 * Public Data Marketplace
 * Private Data Exchange
-
-## References ##
-* [Introduction to Secure Data Sharing](https://docs.snowflake.com/en/user-guide/data-sharing-intro.html)

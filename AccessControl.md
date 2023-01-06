@@ -1,6 +1,6 @@
 # Access Control #
 
-Official Documentation: [Overview of Access Control](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html)
+> [Overview of Access Control](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html)
 
 * All Snowflake objects are individually securable
 * Snowflake's Security model is a combination of:

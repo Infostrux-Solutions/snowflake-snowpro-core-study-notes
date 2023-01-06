@@ -1,6 +1,6 @@
 # Stored Procedures #
 
-Official Documentation: [Stored Procedures](https://docs.snowflake.com/en/sql-reference/stored-procedures.html)
+> [Stored Procedures](https://docs.snowflake.com/en/sql-reference/stored-procedures.html)
 
 Stored Procedures allow procedural logic and error handling that SQL does not support
 
