@@ -1,5 +1,7 @@
 # Bulk Loading #
 
+Bulk loading is used for migrating data from traditional data sources. Bulk loading uses a transactional boundary control which wraps each `COPY INTO` command into an individual transaction that can be rolled back if errors are encountered. Bulk loading uses user-managed compute resources (Virtual Warehouses) which affect the processing time and cost of data loading.
+
 With bulk loading you can ingest files from your local filesystem or from the cloud. Both require either the creation of a named stage or using a table or user stage.
 
 The `PUT` command is used to copy files from a local filesystem into a stage.
