@@ -1,20 +1,10 @@
 # Account and Security Overview #
 
-Snowflake's Security model is a combination of:
-* Discretionary access control - object based; all Snowflake objects are individually securable
-* Role-based access control
-  * Privileges are granted to Roles
-  * Roles are granted to users
-
 ## Security Aspects ##
 * Access: network policies
 * Authentication: Password, MFA or SSO
-* Authorization: Discretionary access control - Role-based access control
-  * Privileges are granted to Roles
-  * Roles are granted to users
-* Data Protection
-  * AES 256 bit encryption and periodic re-keying
-  * TLS 1.2 encryption for all client communications
+* Authorization: combination of Discretionary and Role-based access control
+* Data Protection: data encryption at rest and in motion, replication, recovery features
 * Infrastructure: handled by cloud providers
 
 ## Snowflake Operational Controls ##

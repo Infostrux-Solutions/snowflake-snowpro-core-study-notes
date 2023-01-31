@@ -3,7 +3,7 @@
 Identifies the user and confirms whether they are allowed to login.
 
 ## Authentication Methods ##
-* Username and password
+* Username and password policy (Snowflake-controlled, cannot be changed)
   * Password can be 8-256 characters long and must contain
     * at least one uppercase letter
     * at least one lowercase letter

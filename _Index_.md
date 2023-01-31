@@ -1,4 +1,4 @@
-# Snow Pro Core Exam Preparation Course Notes #
+# Snowflake Snow Pro Core Exam Preparation Course Notes #
 
 ## Snowflake Overview and Architecture ##
 * [Overview](Overview/Overview.md)
@@ -12,23 +12,31 @@
 ## Virtual Warehouses ##
 * [Virtual Warehouses](VirtualWarehouses/VirtualWarehouses.md)
 
-## Snowflake Storage and Data Protection ##
+## Storage and Data Protection ##
 * [Data Storage Layer](StorageAndDataProtection/DataStorageLayer.md)
 * [Data Protection](StorageAndDataProtection/DataProtection.md)
 
-## Snowflake Data Movement ##
+## Data Movement ##
 * [Overview](DataMovement/Overview.md)
 * [Bulk Loading](DataMovement/BulkLoading.md)
 * [Continuous Loading](DataMovement/ContinuousDataLoading.md)
 * [Continuous Processing](DataMovement/ContinuousDataProcessing.md)
 * [Data Unloading](DataMovement/DataUnloading.md)
 
-## Snowflake Account and Security ##
+## Account and Security ##
 * [Overview](AccountAndSecurity/Overview.md)
 * [Access Control](AccountAndSecurity/AccessControl.md)
 * [Authentication](AccountAndSecurity/Authentication.md)
+* [Authorization](AccountAndSecurity/Authorization.md)
+* [Data Protection](AccountAndSecurity/DataProtection.md)
+
+## Performance and Tuning ##
+* [Overview](PerformanceAndTuning/Overview.md)
 
 ## Topics Quizzed on Exams ##
 * [Working with Secure Views](https://docs.snowflake.com/en/user-guide/views-secure.html)
 * [Working with Resource Monitors](https://docs.snowflake.com/en/user-guide/resource-monitors.html)
 * [Directory Tables](https://docs.snowflake.com/en/user-guide/data-load-dirtables.html)
+
+## Sample Exams ##
+* [ExamTopics Snowflake SnowPro Core Exam Actual Questions](https://www.examtopics.com/exams/snowflake/snowpro-core/view/01/)
