@@ -19,7 +19,9 @@
 ## Snowflake Data Movement ##
 * [Overview](DataMovement/Overview.md)
 * [Bulk Loading](DataMovement/BulkLoading.md)
-* [Continuous Loading](DataMovement/ContinuousLoading.md)
+* [Continuous Loading](DataMovement/ContinuousDataLoading.md)
+* [Continuous Processing](DataMovement/ContinuousDataProcessing.md)
+* [Data Unloading](DataMovement/DataUnloading.md)
 
 ## Snowflake Account and Security ##
 * [DRAFT] [Access Control](AccessControl.md)
