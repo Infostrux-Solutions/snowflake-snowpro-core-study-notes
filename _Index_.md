@@ -26,6 +26,7 @@
 ## Snowflake Account and Security ##
 * [Overview](AccountAndSecurity/Overview.md)
 * [Access Control](AccountAndSecurity/AccessControl.md)
+* [Authentication](AccountAndSecurity/Authentication.md)
 
 ## Topics Quizzed on Exams ##
 * [Working with Secure Views](https://docs.snowflake.com/en/user-guide/views-secure.html)
