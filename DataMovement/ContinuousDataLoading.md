@@ -8,6 +8,7 @@ Typically, there would be a source application which would load files into the s
   * Alternatively, you can setup a task which would run the `ALTER PIPE <pipe_name> REFRESH` command on a schedule.
 * You can use the Snowpipe `AUTO_INGEST` method, together with notifications setup on your cloud provider so the pipe is automatically notified when a file lands in the stage
   * The `AUTO_INGEST` method only works with external stages
+  * Auto-Ingest is only available on AWS external stages by using S3 event messages
 
 Once Snowpipe receives a trigger for the ingestion, whether via the REST API or a notification from the cloud provider, files are moved from the stage into an Ingestion Queue and then into the Pipe which contains the `COPY INTO` command with the source stage and the target table.
 * the Snowpipe can be paused, resumed and its return status can be retrieved.
