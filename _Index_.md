@@ -32,6 +32,7 @@
 
 ## Performance and Tuning ##
 * [Overview](PerformanceAndTuning/Overview.md)
+* [Data Clustering](PerformanceAndTuning/DataClustering.md)
 
 ## Topics Quizzed on Exams ##
 * [Working with Secure Views](https://docs.snowflake.com/en/user-guide/views-secure.html)
