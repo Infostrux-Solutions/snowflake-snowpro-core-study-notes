@@ -35,6 +35,10 @@
 * [Data Clustering](PerformanceAndTuning/DataClustering.md)
 * [Virtual Warehouse Scaling](PerformanceAndTuning/VirtualWarehouseScaling.md)
 
+## Semi-Structured Data ##
+* [Overview](SemiStructuredData/Overview.md)
+
+
 ## Topics Quizzed on Exams ##
 * [Working with Secure Views](https://docs.snowflake.com/en/user-guide/views-secure.html)
 * [Working with Resource Monitors](https://docs.snowflake.com/en/user-guide/resource-monitors.html)
