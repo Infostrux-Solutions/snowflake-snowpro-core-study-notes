@@ -4,11 +4,15 @@
 Introductory level offering, providing full, unlimited access to all of Snowflake’s standard features
 * Complete SQL Data Warehouse
 * Secure data sharing across regions/clouds
-* Business hours support, M-F
+* Premier Support 24 x 365
 * Always-on enterprise grade encryption in transit and at rest
 * Customer dedicated virtual warehouses
 * Federated authentication
 * Database replication
+* External Functions 
+* Snowsight analytics UI 
+* Create your own Data Exchange 
+* Data Marketplace access
 * Fail-safe
 
 ### SPECIFICS ###
@@ -28,6 +32,9 @@ Designed specifically for the needs of large-scale enterprises and organizations
 * Up to 90 days of time travel
 * Materialized Views
 * Column-level security
+* Search Optimization Service 
+* Dynamic Data Masking 
+* External Data Tokenization
 * Annual rekey of all encrypted data
 
 ### SPECIFICS ###
@@ -47,6 +54,7 @@ Offers even higher levels of data protection to support the needs of organizatio
 * Database Failover and Fallback for business continuity (e.g. replication with failover and fallback accross regions)
 * AWS PrivateLink support
 * Tri-Secret Secure encryption using customer-managed keys (AWS)
+* External Functions - AWS API Gateway Private Endpoints support
 
 ## Virtual Private Snowflake (VPS) ##
 Business Critical Edition but in a completely different Snowflake environment, isolated from all other Snowflake accounts

@@ -10,6 +10,7 @@
 * [Architecture](Overview/Architecture.md)
 * [Objects](Overview/Objects.md)
 * [Data Sharing](Overview/DataSharing.md)
+* [Pricing](Overview/Pricing.md)
 
 ## Virtual Warehouses ##
 * [Virtual Warehouses](VirtualWarehouses/VirtualWarehouses.md)
