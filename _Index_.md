@@ -1,5 +1,9 @@
 # Snowflake Snow Pro Core Exam Preparation Course Notes #
 
+> * [SnowPro Certifications](https://www.snowflake.com/certifications/)
+> * [[COF-C02] SnowPro Core Certification Exam Guide](https://learn.snowflake.com/courses/course-v1:snowflake+CERT-SPC-GUIDE+B/about)
+> * [[COF-C02] SnowPro Core Certification Exam Study Guide](https://learn.snowflake.com/courses/course-v1:snowflake+SPSG-CORE+B/about)
+
 ## Snowflake Overview and Architecture ##
 * [Overview](Overview/Overview.md)
 * [Snowflake Editions](Overview/Editions.md)
@@ -46,4 +50,5 @@
 * [Directory Tables](https://docs.snowflake.com/en/user-guide/data-load-dirtables.html)
 
 ## Sample Exams ##
-* [ExamTopics Snowflake SnowPro Core Exam Actual Questions](https://www.examtopics.com/exams/snowflake/snowpro-core/view/01/)
+* [ExamTopics: Snowflake SnowPro Core Exam Actual Questions](https://www.examtopics.com/exams/snowflake/snowpro-core/view/01/): 487 questions
+* [FullCertified: Snowflake SnowPro Core - Practice Exam 1](https://www.fullcertified.com/certification/snowflake-snowpro-core/exam/1): 100 questions
