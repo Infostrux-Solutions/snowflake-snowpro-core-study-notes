@@ -45,12 +45,6 @@ Snowflake releases new features weekly.
   * External UDFs (AWS Lambda or Azure Functions)
   * Snowpark
 
-## Architecture ##
-* [Cloud Services Layer](CloudServicesLayer.md)
-* Multi-Cluster Compute (Virtual Warehouses)
-* Centralized Storage - single copy and source of truth for the data
-* Cloud Agnosting Layer - allows Snowflake to run on the major cloud providers: AWS, Azure, GCP
-
 ## Connecting to Snowflake
 * Snowsight: Snowflake web interface/console
 * SnowSQL: The Snowflake CLI client
