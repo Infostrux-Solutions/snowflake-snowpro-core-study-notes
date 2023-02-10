@@ -6,6 +6,8 @@
 * no management of hardware, updates and patches
 * automatic optimizations (partitioning)
 
+Snowflake releases new features weekly.
+
 ### Data Platform Workloads ###
 * Data Warehouse
   * Structured and relational data
@@ -32,7 +34,7 @@
     * Amazon SageMaker
     * DataRobot
     * Dataiku
-* Data Sharing
+* Data Exchange
   * Secure data sharing between accounts in the same cloud provider region
   * Data Marketplace
   * Data Exchange
@@ -48,6 +50,13 @@
 * Multi-Cluster Compute (Virtual Warehouses)
 * Centralized Storage - single copy and source of truth for the data
 * Cloud Agnosting Layer - allows Snowflake to run on the major cloud providers: AWS, Azure, GCP
+
+## Connecting to Snowflake
+* Snowsight: Snowflake web interface/console
+* SnowSQL: The Snowflake CLI client
+* ODBC: client, requires a Snowflake driver
+* JDBC: client, requires a Snowflake driver
+* SDK (Node, Python, Kafka, Spark, Go…)
 
 ## Features ##
 * ANSI SQL compliant OLAP data warehouse
@@ -81,3 +90,6 @@
 * Accessible only by contacting Snowflake support administrators
 * Only available for permanent tables
 * Fail-Safe incurs additional storage costs for the extra 7 days of data retention
+
+## Free Trial ##
+You can apply for a 30-day free trial at the following link https://signup.snowflake.com/. Trying out the Enterprise edition is recommended.
