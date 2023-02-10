@@ -37,7 +37,7 @@
 
 ## Semi-Structured Data ##
 * [Overview](SemiStructuredData/Overview.md)
-
+* [Query Semi-Structured Data](SemiStructuredData/QuerySemiStructuredData.md)
 
 ## Topics Quizzed on Exams ##
 * [Working with Secure Views](https://docs.snowflake.com/en/user-guide/views-secure.html)
