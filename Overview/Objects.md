@@ -47,55 +47,75 @@ Logical grouping of Tables, Views, Stored Procedures, UDFs, Stages, File Formats
   * No Fail-Safe support
 
 ## Table ##
-Contains all the data in a database.
+Contains all the data in a database. 
 
 ### Permanent ###
 * Default table type, used for the highest level of data protection and recovery
 * Persists until dropped
-* Up to 90 days or Time Travel (on Snowflake Enterprise edition and higher)
-* Fail-Safe support
+* 0–90 days of Time Travel (Enterprise Edition necessary, 0–1 in Standard Edition)
+* 7 days of Fail-Safe
+* Can be cloned to a permanent, temporary or transient table
+  * If you clone a Permanent table to Transient or Temporary, the old partitions will remain Permanent, but the new partitions we add to this clone will be Transients/Temporary
 
 ### Transient ###
 * Persists until dropped
 * Available across sessions
 * Time Travel: 0 or 1 days
 * No Fail-Safe support
+* Can only be cloned to a Temporary or Transient table
 
 ### Temporary ###
 * Used for transitory data
-* Tied to and available only within the context a single user session
+* Tied to and available only within the context a single user session. As such, they are not visible to other users or sessions
 * Time Travel: 0 or 1 days
+  * A temporary table is purged once the session ends, so the actual retention period is for 24 hours or the remainder of the session
 * No Fail-Safe support
+* Can only be cloned to a temporary or transient table
+* Can be created with a clustering key, if needed
 
 ### External ###
-* Snowflake table "over" data stored in an external data lake
-* Data is accessed via an external stage
+* Snowflake table "over" data stored in an external stage
 * Persists until removed
 * Read-only
 * No Time Travel
 * No Fail-Safe support
+* Cloning is not supported
+* XML files are not supported for external tables
 
 ## View ##
-Named definition of a SQL query which can be queried as if it were a table.
+Named definition of a SQL query which can be queried as if it were a table. Views can be created on all table types, including external tables.
 
 ### Standard ###
 * Default view type
+* No data is stored
+* No clustering support
 * Executes as the role which owns it
 * DDL available to any role with access to the view
-
-### Secure ###
-* Executes as the role which owns it
-* DDL available only to authorized users
-* Snowflake query optimizer bypasses optimizations used for regular views so secure views are less performant
+* [Streams](https://docs.snowflake.com/en/user-guide/streams-intro.html) are supported
 
 ### Materialized ###
+* Enterprise Edition is required for Materialized views
 * Results of underlying query are stored
-  * Incurs storage costs
-* Behaves more like a table
-* Results are autorefreshed in the background
+  * require storage space and active maintenance, which incur both storage and compute costs
+  * while Materialized Views behave more like Tables, Time Travel is not supported
+* Results are auto-refreshed in the background so new data loaded into the table will be propagated into the Materialized View
 * Consumes background compute for the auto-refresh
   * The background compute does not require a customer-provided warehouse; Snowflake manages the compute
-* Secure materialized views are supported
+* Clustering is supported
+* NO support for [Streams](https://docs.snowflake.com/en/user-guide/streams-intro.html)
+* Changes to the schema of base table are not automatically propagated to materialized views
+* Best used for:
+  * Query results contain a small number of rows and/or columns relative to the underlying table
+  * Queries that require significant processing, e.g. analysis of semi-structured data or expensive aggregates
+  * The underlying table is an external one, which might be slower to query directly
+  * The view’s base table does not change frequently
+
+### Secure ###
+Both Standard and Materialized views can also be defined as Secure
+* Executes as the role which owns it
+* DDL available only to authorized users
+* Can be shared; secure views are mandatory when sharing
+* Snowflake query optimizer bypasses optimizations used for regular views so secure views are less performant
 
 ## Stage ##
 Object pointing to the location of data files in cloud storage
