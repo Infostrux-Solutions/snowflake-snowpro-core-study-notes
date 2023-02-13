@@ -8,7 +8,7 @@
     * Warehouse
     * Database
     * [Resource Monitor](https://docs.snowflake.com/en/user-guide/resource-monitors.html)
-    * Integration
+    * Storage Integration
   * Schema level objects:
     * Table
     * External Table
@@ -118,10 +118,54 @@ Both Standard and Materialized views can also be defined as Secure
 * Snowflake query optimizer bypasses optimizations used for regular views so secure views are less performant
 
 ## Stage ##
-Object pointing to the location of data files in cloud storage
+Stages in Snowflake specify where data files are stored (staged) in cloud storage. They facilitate data loading and unloading.
+* When staging uncompressed files in a Snowflake stage, the files are automatically compressed using `GZIP` unless compression is explicitly disabled
+* Snowflake automatically generates metadata for staged files. This metadata is “stored” in the following virtual columns:
+* `METADATA$FILENAME`: stage path and name of the data file the current row belongs to
+* `METADATA$FILE_ROW_NUMBER`: row number for each record in the staged data file
+* `$[COLUMN_NUMBER]`: staged data file column number; e.g. `$1` refers to the first column in the staged file, `$2` refers to the second column, etc.
+
+### Named Stages ###
+* Created manually
+* Referenced with `@[STAGE_NAME]`
+* can specify file format
+* Supported Cloud Storage services:
+  * Amazon S3 Buckets
+  * Google Cloud Storage Buckets
+  * Microsoft Azure Containers
+* Named Stages can be Internal or External
+  * Internal Named Stage: cloud Storage location managed by Snowflake; data is stored internally within Snowflake.
+  * Named External Stage: references data files stored outside Snowflake.
+    * managed by the user or respective cloud provider and can even be in a different cloud provider than the Snowflake account
+    * Creating an external stage requires providing
+      * URL where the files are located
+      * credentials to access the files
+      * decryption keys to enable decryption of the data
+
+### Default Internal Stages ###
+The default Internal stages
+* Can only be accessed using the SnowSQL CLI
+* Do not support setting file formats
+* Can be of two types: User and Table Stage
+
+#### User Stage ####
+* Each user has a Snowflake personal stage allocated to them by default
+* Represented with `@~`
+* Can only be accessed by the user it belongs to
+
+#### Table Stage ####
+* Each table has a Snowflake stage allocated to it by default
+* Represented with `@%[TABLE_NAME]`
+* Accessible to multiple users 
+* Files can only be loaded/unloaded to/from the table the stage belongs to
 
 ## File Format ##
 Pre-defined format structure that describes a set of staged data to access or load into Snowflake tables for CSV, JSON, AVRO, ORC, PARQUET, and XML input types
+
+## Storage Integration ##
+A Snowflake object that stores a generated identity and access management (IAM) entity for your external cloud storage, along with an optional set of allowed or blocked storage locations. This option enables users to create stages and load and unload data without avoid supplying credentials.
+* Account-level object
+* A single storage integration can support multiple external stages
 
 ## Sequence ##
 You can generate unique numbers with sequences. They are like counters.

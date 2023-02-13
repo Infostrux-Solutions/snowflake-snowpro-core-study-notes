@@ -13,31 +13,6 @@ When data is loaded into Snowflake, it is stored in micropartitions
   * Counts
   * `NULL` values, etc.
 
-
-## Stages ##
-A Stage is a cloud storage/repository location used for storing files before they are loaded into or unloaded from Snowflake. Stages can be three types
-* Table stage
-  * internal stage - managed by Snowflake
-  * created automatically every time a table is created
-  * named `@%[TABLE_NAME]`
-  * does not support setting file formats
-* User stage
-  * internal stage - managed by Snowflake
-  * created automatically every time a user is created
-  * named `@~`
-  * does not support setting file formats
-* Named stage
-  * Can be
-    * once `[STAGE_NAME]` is created, it is referred to with the `@` symbol, e.g. `@[STAGE_NAME]`
-    * internal stage - managed by Snowflake, or
-    * external - managed by the customer, can be even in a different cloud provider or region
-  * created manually
-    * Creating an external stage requires providing
-      * URL where the files are located
-      * credentials to access the files
-      * decryption keys to enable decryption of the data
-  * can specify file format
-
 ## File Formats ##
 A named object that lives inside a `SCHEMA` which defines how Snowflake would read a file. Supported file types
 * Structured data: CSV
