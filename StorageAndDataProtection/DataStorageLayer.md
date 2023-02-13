@@ -5,21 +5,13 @@ The Data Storage Layer is Snowflake managed cloud-based storage available in the
 * Customers are billed for data based on its compressed size as well as any files existing in Snowflake stages
 
 ## Micro-Partitions ##
-Micro-Partitions are contiguous units of storage that generally hold a maximum of 16MB or compressed data (uncompressed the data is between 50-500MB)
+All data in Snowflake tables is automatically divided into micro-partitions. Micro-Partitions are contiguous units of storage that generally hold a maximum of 16MB or compressed data (uncompressed the data is between 50-500MB), organized in a columnar way.
+
+![](../images/MicroPartitionDataOrganization.png)
+
 * Micro-partitions are IMMUTABLE and versioned
-  * In order to modify data in a micro-partition, a new version of the micro-partition must be created
+  * In order to modify data in a micro-partition, a new version of the micro-partition must be created. The older micro-partition is then marked for deletion
   * This is what enables the time travel feature in Snowflake
-* The Cloud Services Layer stores metadata about every table and the micro-partitions where its data is stored
-  * At the table level:
-    * row count
-    * table size (in bytes)
-    * file references and table versions
-  * At the Micro-Partition level:
-    * MIN/MAX (range of values) in each column
-      * this allows micro-partition pruning during query optimization
-      * It also allows the processing of certain queries (e.g, MIN, MAX) at the Cloud Services Layer without engaging the compute or storage layers 
-    * number of distinct values
-    * NULL count
 * Data is compressed within each micro-partition
   * Within each partition, data is organized in a hybrid columnar format
   * On load, data is automatically analyzed for the optimal compression scheme based on its format
@@ -27,6 +19,23 @@ Micro-Partitions are contiguous units of storage that generally hold a maximum o
 * Snowflake attempts to preserve natural data co-location
   * Since data is organized in micro-partitions on load, some natural data clustering and optimization occurs
 * Table records are contained entirely within a micro-partition, they cannot span multiple partitions
+
+### Query Pruning ###
+The metadata stored in the Cloud Services Layer allows Snowflake to minimize the data it needs to load from the storage layer in order to resolve a query. Snowflake performs two types of pruning:
+* micro-partition pruning - reading only the micro-partition files needed to resolve a query
+* column pruning - only reading the columns that we need from each micro-partition
+
+The Cloud Services Layer metadata also allows the processing of certain queries (e.g, MIN, MAX) at the Cloud Services Layer without engaging the compute or storage layers. The metadata tracked is:
+
+* At the table level:
+  * row count
+  * table size (in bytes)
+  * micro-partition references and table versions
+* At the Micro-Partition level:
+  * MIN/MAX (range of values) in each column
+    * this allows micro-partition pruning during query optimization
+  * number of distinct values
+  * NULL count
 
 ## Data Storage Billing ##
 * Customers are billed for actual (compressed) storage used based on the daily average, billed per Terabyte per month
