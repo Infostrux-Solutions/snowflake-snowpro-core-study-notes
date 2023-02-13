@@ -7,7 +7,7 @@
     * Grants
     * Warehouse
     * Database
-    * Resource Monitor
+    * [Resource Monitor](https://docs.snowflake.com/en/user-guide/resource-monitors.html)
     * Integration
   * Schema level objects:
     * Table

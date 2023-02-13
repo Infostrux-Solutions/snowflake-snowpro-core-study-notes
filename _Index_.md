@@ -43,11 +43,21 @@
 * [Query Semi-Structured Data](SemiStructuredData/QuerySemiStructuredData.md)
 * [Load and Unload Semi-Structured Data](SemiStructuredData/LoadAndUnloadSemiStructuredData.md)
 
-## Topics Quizzed on Exams ##
+## Exam Tips ##
+
+### Exam Prep Tips ###
+Read every single “Reading Assets” article from the [[COF-C02] SnowPro Core Certification Exam Study Guide](https://learn.snowflake.com/courses/course-v1:snowflake+SPSG-CORE+B/about).  You will find is the real exam questions blend the type of questions in the practice exams with these real world examples.
+
+### Topics Quizzed on Exams ###
 * [Working with Secure Views](https://docs.snowflake.com/en/user-guide/views-secure.html)
 * [Working with Resource Monitors](https://docs.snowflake.com/en/user-guide/resource-monitors.html)
 * [Directory Tables](https://docs.snowflake.com/en/user-guide/data-load-dirtables.html)
 
-## Sample Exams ##
+### Sample Exams ###
+
+#### Free ####
 * [ExamTopics: Snowflake SnowPro Core Exam Actual Questions](https://www.examtopics.com/exams/snowflake/snowpro-core/view/01/): 487 questions
 * [FullCertified: Snowflake SnowPro Core - Practice Exam 1](https://www.fullcertified.com/certification/snowflake-snowpro-core/exam/1): 100 questions
+
+#### Paid ####
+* [Udemy: [COF-C02] Snowflake SnowPro Core Certification Practice Sets](https://www.udemy.com/course/snowflake-snowpro-core-certification-exam-practice-sets/)
