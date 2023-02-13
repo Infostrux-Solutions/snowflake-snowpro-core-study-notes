@@ -1,17 +1,18 @@
 # Data Movement #
 
 Loading and unloading data into Snowflake can be:
-* Bulk Loading
-* Snowpipe Pipelines
+* [Bulk Loading](./BulkLoading.md)
+* [Continuous Data Loading](./ContinuousDataLoading.md)
 * using a Connector
 
-When data is loaded into Snowflake, it is stored in micropartitions
-* each micropartition contains a subset of the ingested table rows
-* data in the micropartition is compressed and encrypted
-* for each micropartition, Snowflake stores metadata such as
-  * `MIN` and `MAX` of values stored in each column in the micropartition
-  * Counts
-  * `NULL` values, etc.
+Factors which affect loading times are
+* the physical location of the stage,
+* GZIP compression efficiency, or
+* the number and types of columns
+
+You can both load and unload data into tables with the `COPY` command
+* LOAD: copy data from the stages into a Snowflake table 
+* UNLOAD: co;y data from a table to a stage, or external location
 
 ## File Formats ##
 A named object that lives inside a `SCHEMA` which defines how Snowflake would read a file. Supported file types

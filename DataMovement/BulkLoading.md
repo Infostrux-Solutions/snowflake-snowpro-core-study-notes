@@ -1,18 +1,27 @@
 # Bulk Loading #
 
-Bulk loading is used for migrating data from traditional data sources. Bulk loading uses a transactional boundary control which wraps each `COPY INTO` command into an individual transaction that can be rolled back if errors are encountered. Bulk loading uses user-managed compute resources (Virtual Warehouses) which affect the processing time and cost of data loading.
+Bulk load is the process of loading batches of data from files already available at any stage into Snowflake tables.
+* You need to specify the table name where you want to copy the data, the stage where the files are, the file/patterns you want to copy, and the file format
+* Bulk loading uses a transactional boundary control which wraps each `COPY INTO` command into an individual transaction that can be rolled back if errors are encountered
+* The information about the loaded files is stored in Snowflake metadata. You cannot COPY the same file again in the next 64 days unless you specify it (“FORCE=True” command)
+  * Renaming a previously ingested file in the stage does not modify the metadata so the file won't be re-ingested with the next `COPY INTO` command
+* Bulk loading uses user-managed compute resources (Virtual Warehouses) which affect the processing time and cost of data loading.
+* It supports data transformation while loading, using column reordering, column omission, casting, etc.
+  * some transformations like Flatten, Join, Group by, Filters or Aggregations are not supported.
+* You cannot Load/Unload files from your Local Drive, they need to be staged first
+* Using the Snowflake UI, you can only Load 50MB files. You can copy bigger files using SnowSQL
+* Organizing input data by granular path can improve load performance
 
-With bulk loading you can ingest files from your local filesystem or from the cloud. Both require either the creation of a named stage or using a table or user stage.
-
-The `PUT` command is used to copy files from a local filesystem into a stage.
-> Compression during a `PUT` operation uses the **local** machine's memory and `/tmp` directory disk space.
-
-The `LIST` command can be used to list the files in the stage.
-
-When loading data from cloud storage it is generally recommended to create an external stage. If no stage is created, you will need to provide the location, credentials and decryption keys for each `COPY INTO` command.
+## Staging ##
+With bulk loading you can ingest files from your local filesystem or from the cloud. Files can be copied to a Snowflake stage using the `PUT` command:
+* Compression during a `PUT` operation uses the **local** machine's memory and `/tmp` directory disk space. 
+* The `LIST` command can be used to list the files in the stage. 
+* When loading data from cloud storage it is generally recommended to create an external stage
+* If no stage is created, you will need to provide the location, credentials and decryption keys for each `COPY INTO` command.
 
 ## COPY INTO Command ##
-The `COPY INTO` command is used to load the data from the stage into the table. Snowflake will automatically load all files in the stage which have not been previously loaded. Metadata on which files have been loaded is kept around for about 64 days.
+The `COPY INTO` command is used to load the data from staged files an existing table. Snowflake will automatically load all files in the stage which have not been previously loaded
+* Metadata on which files have been loaded is kept around for about 64 days.
 > BEST PRACTICE: Files should not be kept in a stage for longer than 64 days
 
 If you want to load files regardless whether they were loaded before, you can use:
@@ -24,6 +33,7 @@ Other options:
 * `VALIDATION_MODE` - "dry run" to validate the data without loading it
 * `SIZE_LIMIT` - limit the amount of data being ingested
 * `PURGE` - delete any files from the stage which were successfully loaded. Default is `FALSE`
+  * If the purge operation fails for any reason, no error is returned
 * `RETURN_FAILED_ONLY` - returns only the failed rows. Default is `FALSE`
 * `ENFORCE_LENGTH` - will cause data that exceeds the column size defined in the table to be treated as errors. Default is `TRUE`
 * `TRUNCATECOLUMNS` - will cause data that exceeds the column size defined in the table to be truncated to the column size and not treated as an error. Default is `FALSE`
@@ -34,7 +44,7 @@ Other options:
   * `SKIP_FILE` - files with errors are skipped
   * `SKIP_FILE_<n>` - files with a `<n>` number of errors are skipped
   * `SKIP_FILE_<n>%` - files with a `<n>%` percentage of errors are skipped
-  * `ABORT_STATEMENT` - abort the `COPY INTO` execution on any error encountered. Rows loaded prior to the error is reverted.
+  * `ABORT_STATEMENT` - abort the `COPY INTO` execution on any error encountered. Rows loaded prior to the error are reverted
 
 ## Validating a Data Load ##
 Data can be validated before loading with the `COPY INTO` option `VALIDATION_MODE` which can be set to:

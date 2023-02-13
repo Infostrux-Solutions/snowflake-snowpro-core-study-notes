@@ -5,7 +5,7 @@ The Data Storage Layer is Snowflake managed cloud-based storage available in the
 * Customers are billed for data based on its compressed size as well as any files existing in Snowflake stages
 
 ## Micro-Partitions ##
-All data in Snowflake tables is automatically divided into micro-partitions. Micro-Partitions are contiguous units of storage that generally hold a maximum of 16MB or compressed data (uncompressed the data is between 50-500MB), organized in a columnar way.
+All data in Snowflake tables is automatically divided into micro-partitions. Micro-Partitions are contiguous units of storage that generally hold a maximum of 16MB or encrypted, compressed data (uncompressed the data is between 50-500MB), organized in a columnar way.
 
 ![](../images/MicroPartitionDataOrganization.png)
 
