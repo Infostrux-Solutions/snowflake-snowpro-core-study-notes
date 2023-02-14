@@ -13,11 +13,21 @@ Bulk load is the process of loading batches of data from files already available
 * Organizing input data by granular path can improve load performance
 
 ## Staging ##
-With bulk loading you can ingest files from your local filesystem or from the cloud. Files can be copied to a Snowflake stage using the `PUT` command:
+
+### Staging from a Local Storage on a Client Machine ###
+We can use the `PUT` command to UPLOAD files from a local directory/folder on a client machine into an INTERNAL STAGE (named internal stage, user stage, or table stage):
+```iso92-sql
+PUT file:///tmp/data/mydata.csv @my_int_stage;
+```
+* `PUT` does NOT work with external stages.
+* You cannot use the `PUT` command from the Snowflake Web UI, you will need to use SnowSQL
 * Compression during a `PUT` operation uses the **local** machine's memory and `/tmp` directory disk space. 
+* Uploaded files are automatically encrypted with 128-bit or 256-bit keys
 * The `LIST` command can be used to list the files in the stage. 
+
+### Staging from Cloud Storage ###
 * When loading data from cloud storage it is generally recommended to create an external stage
-* If no stage is created, you will need to provide the location, credentials and decryption keys for each `COPY INTO` command.
+* If no stage was created, you will need to provide the location, credentials and decryption keys for each `COPY INTO` command.
 
 ## COPY INTO Command ##
 The `COPY INTO` command is used to load the data from staged files an existing table. Snowflake will automatically load all files in the stage which have not been previously loaded

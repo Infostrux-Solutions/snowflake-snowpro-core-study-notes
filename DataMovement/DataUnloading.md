@@ -5,10 +5,16 @@ Similar to [Bulk Loading](BulkLoading.md), unloading uses the `COPY INTO` comman
 COPY INTO <stage> FROM <table>;
 ```
 
-* To unload data, you would first `COPY INTO` a stage where the files will be available to access.
-* If copying to your local file system, once you have run `COPY INTO` the stage, you would use the `GET` command to download the files locally.
+## Unloading to Local Storage on a Client Machine ##
+Use the `GET` command to DOWNLOAD files from a Snowflake INTERNAL STAGE (named internal stage, user stage, or table stage) to a local directory/folder on a client machine:
+```iso92-sql
+GET @my_int_stage file:///tmp/data/;
+```
+* You cannot use the `GET` command from the Snowflake Web UI, you will need to use SnowSQL
+
+### Staging from Cloud Storage ###
 * It is recommended to use an external named stage for data unloading
-* Files can also be unloaded directly by specifying the URL and any necessary credentials
+* Files can also be unloaded directly to cloud storage by specifying the URL and any necessary credentials
 
 ## Considerations ##
 * Supported file formats
