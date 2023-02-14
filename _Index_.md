@@ -35,6 +35,7 @@
 
 ## Performance and Tuning ##
 * [Overview](PerformanceAndTuning/Overview.md)
+* [Caching](PerformanceAndTuning/Caching.md)
 * [Data Clustering](PerformanceAndTuning/DataClustering.md)
 * [Virtual Warehouse Scaling](PerformanceAndTuning/VirtualWarehouseScaling.md)
 
