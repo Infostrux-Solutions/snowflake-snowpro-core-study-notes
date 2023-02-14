@@ -1,20 +1,20 @@
 # Virtual Warehouses #
 
-Virtual Warehouses (VWs) are the compute layer in Snowflake's architecture. It is a logical wrapper around a cluster of servers with CPU, memory and disk.
+Virtual Warehouses (VWs) are the compute layer in Snowflake's architecture. It is a logical wrapper around a cluster of servers with CPU, memory and disk. Data Warehouses are used to perform queries and DML operations (like loading data into tables).
 * The actual compute underlying the VW is fully managed by Snowflake
 * While running, even if idle, a VW consumes Snowflake credits - you are charged for compute
 * VWs can be Standard or Multi-Cluster Warehouses (MCW). Standard Warehouses have only a single compute cluster and cannot scale out
 
-## SCALE OUT/IN: Multi-Cluster Warehouses ## 
+## SCALE OUT/IN: Multi-Cluster Warehouses (MCW) ## 
 MCWs can automatically `SCALE OUT/IN` by spawning (or shutting down) additional compute clusters
 * used for handling spikes in concurrent compute requests
-* MCWs are a feature of Snowflake editions Enterprise and higher
+* MCWs are a feature of Snowflake Enterprise Edition and higher
 * MCWs can set to scale out to a maximum of 10 clusters
+* The number of credits billed is calculated based on the size and the number of warehouses that run within the time period
 * MCWs scale out under two Scaling Policies - Standard and Economy
   * Standard policy: starts additional clusters if a query is queueing or expected to queue
   * Economy policy: will start an additional cluster only after at least 6 minutes of workload have been queued up for the future cluster
 * Incoming queries are load-balanced across the available running clusters
-
 
 ## SCALE UP/DOWN: Resizing Warehouses ##
 A Virtual Warehouse can `SCALE UP/DOWN` (be resized), manually, at any time, even while running
@@ -32,17 +32,20 @@ A Virtual Warehouse can `SCALE UP/DOWN` (be resized), manually, at any time, eve
   * sizes range from XS, through S, M, L, XL, 2XL up to 6XL
     * the default size for warehouses created through the web interface is XL
     * the default size for warehouses created using SQL is XS
-* A VW can be set to auto-suspend when idle for a configurable number of minutes
-  * Through the web UI this can be set as low as 5 minutes
-  * Through SQL this can be set as low as 1 minute (60 seconds) which is the minimum auto-suspend setting
+    * 5XL and 6XL warehouses are generally available in AWS regions, and in preview in US Government and Azure regions.
+* A VW can be set to auto-suspend when idle for a configurable number of minutes.
+  * By default, the auto-suspend option is enabled.
+  * Through the web UI auto-suspend can be set as low as 5 minutes
+  * Through SQL auto-suspend can be set to the minimum auto-suspend setting of 1 minute (60 seconds)
   * VWs can also be started or suspended manually
 * A VW can also be set to auto-resume when a new query is submitted
-* A VW will automatically start when first created
+  * Auto-resume is enabled by default 
+  * A VW will automatically start when first created
   * In SQL a VW can be created in suspended mode by setting the `INITIALLY_SUSPENDED = TRUE` option
-* When first created a VW has, by default, the USAGE permission granted to the role that creates it
+* When a VW is first created, it has, by default, the USAGE permission granted to the role that creates it
  
 ## Compute Credits ##
-* Customer-created compute is charged per second with a one minute minimum
+* Customer-created compute is charged per second with a 60-second minimum each time the warehouse starts
 * Snowflake-created serverless (background) compute is charged per second with no minimum
   * These are request that can be handled without a VW, e.g.: `SHOW` commands, DDL commands, etc.
 * Credit cost can vary depending on cloud provider and region
