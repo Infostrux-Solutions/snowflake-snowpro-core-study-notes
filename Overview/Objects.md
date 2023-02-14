@@ -7,7 +7,7 @@
     * Grants
     * Warehouse
     * Database
-    * [Resource Monitor](https://docs.snowflake.com/en/user-guide/resource-monitors.html)
+    * Resource Monitor
     * Storage Integration
   * Schema level objects:
     * Table
@@ -37,6 +37,9 @@ Logical collection of Schemas.
 * Databases can be created as `Transient`
   * Time Travel: 0 or 1 days
   * No Fail-Safe support
+
+## Resource Monitor ##
+See [Resource Monitors](../VirtualWarehouses/ResourceMonitors.md)
 
 ## Schema ##
 Logical grouping of Tables, Views, Stored Procedures, UDFs, Stages, File Formats, Pipes, Sequences, Shares, etc. Every schema belongs to a single Database. When a database is created, there are two default schemas created in it
