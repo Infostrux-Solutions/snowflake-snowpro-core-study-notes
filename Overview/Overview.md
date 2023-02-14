@@ -6,7 +6,7 @@
 * no management of hardware, updates and patches
 * automatic optimizations (partitioning)
 
-Snowflake releases new features weekly.
+Snowflake releases new features **_weekly_**
 
 ### Data Platform Workloads ###
 * Data Warehouse

@@ -194,8 +194,14 @@ Extend the system to perform operations.
   * [Snowflake Scripting](https://docs.snowflake.com/en/developer-guide/snowflake-scripting/index.html), an extension to Snowflake SQL that adds support for procedural logic
 * Stored Procedures can be secure or unsecure
 * Stored Procedures support schema definition (DDL) and data modification (DML) SQL statements
-* Stored Procedures can run multiple SQL statements.
+* Stored Procedures can run multiple SQL statements
 * Stored Procedures are allowed, but not required, to explicitly return a value (such as an error indicator)
+* Stored Procedures are called as independent statements
+  ```postgres-psql
+  CALL MyStoredProcedure_1(argument_1);
+  ```
+* The returned values CANNOT be used directly in a SQL statement
+* Every `CREATE PROCEDURE` statement must include a `RETURNS` clause that defines a return type, even if the procedure does not explicitly return anything
 * Store Procedures CANNOT return a set of rows
 * Stored Procedures can be defined to run as their owner (by default) or as the procedure caller (`EXECUTE AS CALLER`)
 * Stored Procedures can be defined to run as their owner (by default) or as the procedure caller (`EXECUTE AS CALLER`)
@@ -211,11 +217,13 @@ Extend the system to perform operations.
 ## UDF: User-Defined Function ##
 > [User Defined Function](https://docs.snowflake.com/en/sql-reference/user-defined-functions.html)
 
-Extend Snowflake to perform operations that are not available through built-in, system-defined functions.
+Extend Snowflake to perform operations that are not available through built-in, system-defined functions such as include programming constructs like branching and looping.
+.
 * UDFs accept 0 or more parameters.
-* For each row passed to a UDF, the UDF returns either:
+* For each row passed to a UDF, the UDF must return either:
   * a scalar (i.e. single) value, or
-  * if defined as a `RETURNS TABLE` function, a set of rows. When the UDF returns a table, it can be called a User Defined Table Function (UDTF)
+  * if defined as a `RETURNS TABLE` function, a set of zero or more rows.
+    * When the UDF returns a table, it can be called a User Defined Table Function (UDTF)
 * A UDF can be written in:
   * Java
   * JavaScript
@@ -223,6 +231,7 @@ Extend Snowflake to perform operations that are not available through built-in, 
   * SQL (default support language)
 * UDFs can be secure or unsecure
 * UDFs do not support schema definitions (DDL) or data modifications (DML)
+* The returned value(s) CAN be used directly in statement SQL
 * While system functions can be listed with `SHOW FUNCTIONS;`, to list UDFs, use `SHOW USER FUNCTIONS;`
 * When calling a UDF which returns a table, you must wrap it in the `TABLE()` function
   ```postgres-psql
