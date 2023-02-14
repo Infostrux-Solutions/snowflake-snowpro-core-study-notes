@@ -1,5 +1,6 @@
 # Objects #
 * All objects in Snowflake are securable.
+
 * Other than the Organization object, objects can be at the Account level or the Schema level
   * Account level objects:
     * User
@@ -21,6 +22,9 @@
     * Stage
     * File Format
     * Pipe
+
+![](../images/SecurableObjectsHierarchy.png)
+
 * The definitions of most objects can be retrieved using the [GET_DDL()](https://docs.snowflake.com/en/sql-reference/functions/get_ddl.html) function.
 
 ## Organization ##
