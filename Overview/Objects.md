@@ -72,6 +72,7 @@ Contains all the data in a database.
 * Tied to and available only within the context a single user session. As such, they are not visible to other users or sessions
 * Time Travel: 0 or 1 days
   * A temporary table is purged once the session ends, so the actual retention period is for 24 hours or the remainder of the session
+* Temporary tables incur storage costs
 * No Fail-Safe support
 * Can only be cloned to a temporary or transient table
 * Can be created with a clustering key, if needed
