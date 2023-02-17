@@ -6,11 +6,12 @@ There are different ways to ingest data continuously into Snowflake:
 * Third-Party Data Integration Tools: You can do it with other [supported integration tools](https://docs.snowflake.com/en/user-guide/ecosystem-etl.html)
 
 ## Snowpipe ##
-It uses a Snowpipe object to ingest files as they appear
+Enables streaming/pipeline/micro-batch/near-real-time loading of frequent, small volumes of data into Snowflake.
+* Specifies the `COPY INTO` command that is used to load the data
+* Can be used with structured and semi-structured data
 * No scheduling is required
 * Snowpipe is serverless; it doesn't use Virtual Warehouses
 * It is used for small volumes of frequent data which it loads continuously (micro-batches)
-* It is used for Streaming / Near Real-Time data
 * Snowpipe does not guarantee that files will be loaded in the same order that they were staged
 * Snowpipe retains 14 days of metadata vs. bulk loading which retains metadata for 64 days. You cannot copy the same files with Snowpipe again during these 14 days
   * Renaming a previously ingested file in the stage does not modify the metadata so the file won't be re-ingested at the next SnowPipe run

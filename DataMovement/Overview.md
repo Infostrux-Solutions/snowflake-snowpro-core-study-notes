@@ -15,16 +15,25 @@ You can both load and unload data into tables with the `COPY` command
 * UNLOAD: co;y data from a table to a stage, or external location
 
 ## File Formats ##
-A named object that lives inside a `SCHEMA` which defines how Snowflake would read a file. Supported file types
+A named object that lives inside a `SCHEMA` which defines the format information required for Snowflake to interpret a file. You can specify different parameters, for example, the file’s delimiter, if you want to skip the header or not, etc.
+
+| Format  | Type            | Load | Unload | Binary Format |
+|---------|-----------------|------|--------|---------------|
+| CSV     | Structured      | Yes  | Yes    | No            |
+| JSON    | Semi-structured | Yes  | Yes    | No            |
+| Parquet | Semi-structured | Yes  | Yes    | Yes           |
+| XML     | Semi-structured | Yes  | No     | No            |
+| AVRO    | Semi-structured | Yes  | No     | Yes           |
+| ORC     | Semi-structured | Yes  | No     | Yes           |
+
 * Structured data: CSV
+  * It’s the fastest file format to load data
   * May need to specify `FIELD_DELIMITER`, `RECORD_DELIMITER` and whether the file header should be skipped with `SKIP_HEADER`
 * Semi-structured data: JSON, Parquet, Avro, ORC, XML
+  * Semi-structured data is saved as `VARIANT` type in Snowflake tables
+  * The maximum size for the `VARIANT` data type is 16MB
+  * it can be queried using JSON notation, see [Query Semi-Structured Data](../SemiStructuredData/QuerySemiStructuredData.md)
 * File Format has to be specified for every `COPY INTO` command
   * A File Format can be attached to a stage - automatically associates the File Format for all files stored in the stage
   * A File Format can be attached to a table - automatically associates the File Format for all `COPY INTO` commands targeting the table
-  * A File Format can be specified for each `COPY INTO` command which will override the stage or table ones, if specified 
-
-## Pipe (Snowpipe) ##
-Enables streaming/pipeline/micro-batch data loading into Snowflake.
-* Specify the `COPY INTO` command that is used to load the data
-* Can be used with structured and semi-structured data
+  * A File Format can be specified for each `COPY INTO` command which will override the stage or table ones, if specified
