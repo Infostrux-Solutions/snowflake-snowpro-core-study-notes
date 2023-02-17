@@ -176,7 +176,19 @@ A Snowflake object that stores a generated identity and access management (IAM) 
 * A single storage integration can support multiple external stages
 
 ## Sequence ##
-You can generate unique numbers with sequences. They are like counters.
+> [Using Sequences](https://docs.snowflake.com/en/user-guide/querying-sequences)
+
+Sequences are schema-level objects used to generate unique numbers across sessions and statements, including concurrent statements. They can generate values for a primary key or any column that requires a unique value. They have an initial value and an interval.
+
+You can access sequences in queries as expressions. The function `nextval`, will generate the next unique sequential value.
+```postgres-psql
+CREATE OR REPLACE SEQUENCE seq START = 1 INCREMENT = 5;
+CREATE OR REPLACE TABLE PEOPLE 
+(
+  ID NUMBER DEFAULT PEOPLE_SEQ.nextval, 
+  NAME VARCHAR(50)
+);
+```
 
 ## Pipe ##
 A special type of object which enables the automatic loading of data from Stage files as soon as they are available.
