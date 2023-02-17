@@ -56,13 +56,28 @@ ORDER BY scheduled_time;
 ```
 
 ## Streams ##
-A Stream can be created on a table and used for CDC (Change Data Capture) to identify and act on changed records.
+Streams (also known as Table Streams) are Snowflake objects that record DML changes (INSERTS, UPDATES, and DELETES) made to tables, views and secure views. They also store metadata about each change. A Stream can be created on a table and used for CDC (Change Data Capture) to identify and act on changed records.
+
+When created, a table stream logically takes an initial snapshot of every row in the source table by initializing a point in time (called an offset) as the current transactional version of the table. The stream then records the DML changes after this snapshot was taken.
+
 * Streams hold no data. They can be thought of as timestamped bookmarks for a particular state of a table
-* Streams can be of two types:
+* Streams can be of three types:
   * Standard Stream
     * Captures all changes in the table records
-    * The Streams metadata columns capture:
-      * what the action was - `INSERT`, `UPDATE`, `DELETE`, etc.
-      * whether it was an update
-      * `row_id` impacted by the change
+    * Supported on tables, directory tables, and views
   * Append-Only Stream
+    * Tracks row inserts only
+    * Supported on tables, directory tables, and views
+  * Insert Only
+    * Tracks row inserts only
+    * Supported on EXTERNAL TABLES only
+* Each stream contains the following metadata:
+  * `METADATA$ACTION` - indicates the DML operation (`INSERT`, `DELETE`) recorded. Note that updates are recorded as `INSERT`, see `METADATA$ISUPDATE` below.
+  * `METADATA$ISUPDATE` - indicates whether the operation was part of an `UPDATE` statement
+  * `METADATA$ROW_ID` - unique and immutable ID for the row
+* The `SYSTEM$STREAM_HAS_DATA` function indicates whether a stream contains change data capture (CDC) records
+* Streams ensure exactly-once semantics for new or changed data in a table
+  * a stream only contains the **last** DML action on a row. A stream will hold only one record per table row, if any, reflecting the current state of the row compared to its initial state when the stream was first created
+  * if the row has not been modified, there will be no Stream record at all
+  * if the row was modified but then it was reverted to its original state when the stream was first created, the Stream record for that row will be removed
+* Multiple streams can be created for the same table and consumed by different tasks
