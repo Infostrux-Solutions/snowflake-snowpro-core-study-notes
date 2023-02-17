@@ -54,3 +54,11 @@ A Virtual Warehouse can `SCALE UP/DOWN` (be resized), manually, at any time, eve
 ### Cloud Services Compute Billing ###
 * Customers are charged for cloud computing (e.g. in the Cloud Services Layer) that exceeds 10% of the total compute costs for the account.
 * Use the `WAREHOUSE_METERING_HISTORY` view to see how much cloud compute your account is using
+
+## Transactions ##
+A transaction is a sequence of SQL statements that are committed or rolled back as a unit. All statements in the transaction are either applied (i.e., committed) or undone (i.e., rolled back) together. For this reason, transactions are ACID (Atomicity, Consistency, Isolation & Durability) compliant.
+
+* If a session is disconnected for whatever reason and a transaction remains in a detached state which cannot be committed or rolled back, Snowflake takes 4 hours to abort a transaction and roll it back.
+* You can abort a running transaction with the system function `SYSTEM$ABORT_TRANSACTION `
+* Each transaction has independent scope
+* Snowflake does not support Nested Transactions, although it supports Nested Procedure calls
