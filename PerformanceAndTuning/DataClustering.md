@@ -28,9 +28,9 @@ Clustering depth measures the average number of overlapping micro-partitions for
 ## Automatic Clustering ##
 > [Automatic Clustering](https://docs.snowflake.com/en/user-guide/tables-auto-reclustering.html)
 
-Snowflake provides periodic & automatic re-clustering to maintain optimal clustering. When the ingestion-order natural clustering is not advantageous or has degraded due to extensive `INSERT` operations, Snowflake can automatically recluster the data.
+Snowflake provides periodic & automatic re-clustering to maintain optimal clustering. When the ingestion-order natural clustering is not advantageous or has degraded due to extensive `INSERT` operations, Snowflake provides a mechanism for its customers to override its natural clustering algorithms by defining clustering keys. This will result in like data (by key) being co-loaded in the same micro-partitions.
 
-Snowflake only reclusters a clustered table if it will benefit from the operation. It monitors and evaluates the tables to determine whether they would benefit from reclustering, and automatically reclusters them, as needed. In most cases, no tasks are required to enable Automatic Clustering for a table. You simply define a clustering key for the table. This will result in like data (by key) being co-loaded in the same micro-partitions.
+Snowflake only reclusters a clustered table if it will benefit from the operation. It monitors and evaluates the tables to determine whether they would benefit from reclustering, and automatically reclusters them, as needed. In most cases, no tasks are required to enable Automatic Clustering for a table. 
 
 ```iso92-sql
 CREATE|ALTER TABLE ...

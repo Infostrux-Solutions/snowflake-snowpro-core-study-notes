@@ -3,7 +3,7 @@
 Snowflake pricing and cost are based on the actual usage. You pay for what you use and scale storage and compute independently.
 
 ## Storage Costs ##
-All customers are charged a monthly fee for the data they store in Snowflake. Storage cost is measured using the **average daily amount of storage used per month, after compression**, for all customer data stored in Snowflake.
+All customers are charged a flat monthly fee per Terabyte for the data they store in Snowflake. Storage cost is measured using the **average daily amount of storage used per month, after compression**, for all customer data stored in Snowflake.
 
 The storage includes:
 * Data stored in tables, even temporary ones
