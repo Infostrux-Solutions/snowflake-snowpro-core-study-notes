@@ -41,7 +41,7 @@ Snowflake's unique architecture consists of three layers, all of them with High 
 * Each Warehouse is isolated from others and can be configured individually
 
 ### Cloud Services Layer ###
-Also known as the Global Services Layer, it is a collection of highly available and scalable services that coordinate activities across Snowflake. It includes:
+Also known as the Global Services Layer, it is a collection of highly available and scalable services that coordinate activities across Snowflake. The Cloud Services Layer is shared between accounts (other than accounts setup with a Virtual Private Snowflake Edition). It includes:
   * Authentication and access control
   * Infrastructure management
   * Transaction management (ACID compliant)
