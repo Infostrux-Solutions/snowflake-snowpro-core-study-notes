@@ -39,9 +39,13 @@ Designed specifically for the needs of large-scale enterprises and organizations
 * Up to 90 days of time travel
 * Materialized Views
 * Column-level security
+  * Dynamic Data Masking - uses masking policies to mask some columns for users with a lower role at query time
+  * External Data Tokenization
+    * tokenize sensitive data before loading it into Snowflake
+    * you can also detokenize it using masking policies
+    * useful for sensitive data like passwords, etc.
 * Search Optimization Service 
 * Dynamic Data Masking 
-* External Data Tokenization
 * Annual rekey of all encrypted data
 
 ### SPECIFICS ###
@@ -61,8 +65,13 @@ Offers even higher levels of data protection to support the needs of organizatio
   * AWS PrivateLink support
   * Tri-Secret Secure encryption using customer-managed keys (AWS)
 * Enhanced security
-  * HIPPA (Health Insurance Portability and Accountability Act) support
-  * PCI compliance
+  * HIPPA (Health Insurance Portability and Accountability Act) support / HITRUST
+  * PCI (PCI-DSS)
+  * ISO/IEC 27001
+  * FedRAMP Moderate
+  * SOC 1 Type II
+  * SOC 2 Type II
+  * GxP
 * External Functions - AWS API Gateway Private Endpoints support
 
 ## Virtual Private Snowflake (VPS) ##

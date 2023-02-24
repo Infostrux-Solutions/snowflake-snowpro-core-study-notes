@@ -150,6 +150,7 @@ The default Internal stages
 
 ## File Format ##
 Pre-defined format structure that describes a set of staged data to access or load into Snowflake tables for CSV, JSON, AVRO, ORC, PARQUET, and XML input types
+* A File Format can be created as a clone from another File Format
 
 ## Storage Integration ##
 A Snowflake object that stores a generated identity and access management (IAM) entity for your external cloud storage, along with an optional set of allowed or blocked storage locations. This option enables users to create stages and load and unload data without avoid supplying credentials.
