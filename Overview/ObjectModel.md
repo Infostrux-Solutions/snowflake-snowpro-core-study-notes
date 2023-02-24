@@ -1,13 +1,16 @@
 # Objects #
-* All objects in Snowflake are securable.
+* All objects in Snowflake are securable - privileges on objects can be granted to Roles and Roles are granted to Users.
+* Additionally, all objects can be interacted with and configured via SQL given the user has sufficient privileges.
 
-* Other than the Organization object, objects can be at the Account level or the Schema level
+* Other than the Organization and Account objects, objects can be at the Account level or the Schema level
   * Account level objects:
+    * Network Policy
     * User
     * Role
     * Grants
     * Warehouse
     * Database
+    * Share
     * Resource Monitor
     * Storage Integration
   * Schema level objects:
@@ -23,35 +26,13 @@
     * File Format
     * Pipe
 
+> * Note that object identifiers are case insensitive and cannot contain spaces or special characters unless they are enclosed in quotes.
+> * When an object identifier is enclosed in quotes, it becomes case sensitive!
+
 ![](../images/SecurableObjectsHierarchy.png)
 
+* Schemas and Database Roles are Database Level Objects
 * The definitions of most objects can be retrieved using the [GET_DDL()](https://docs.snowflake.com/en/sql-reference/functions/get_ddl.html) function.
-
-## Organization ##
-Top level securable object which serves as a logical grouping of Accounts.
-
-## Account ##
-Logical grouping of Databases. The account's name must be unique within an organization, regardless of which Snowflake region the account is in. The URL of the account consists of the account identifier, the cloud provider region and the snowflake domain, `snowflakecomputing.com`, e.g. `tn10000.eu-west-1.snowflakecomputing.com`. It is possible to request a vanity address to convert the identifier into your company's name.
-
-## Warehouse ##
-Warehouses are the compute part of the Snowflake engine. They are a set of virtual machines provided at runtime to help execute a given query.
-
-## Database ##
-Logical collection of Schemas.
-* Databases can be created as `Transient`
-  * Time Travel: 0 or 1 days
-  * No Fail-Safe support
-
-## Resource Monitor ##
-See [Resource Monitors](../VirtualWarehouses/ResourceMonitors.md)
-
-## Schema ##
-Logical grouping of Tables, Views, Stored Procedures, UDFs, Stages, File Formats, Pipes, Sequences, Shares, etc. Every schema belongs to a single Database. When a database is created, there are two default schemas created in it
-* `public`: default schema for any object created without specifying a schema
-* `information_schema`: stores metadata information
-* Schemas can be created as `Transient`.
-  * Time Travel: 0 or 1 days
-  * No Fail-Safe support
 
 ## Table ##
 Contains all the data in a database. 
@@ -174,6 +155,12 @@ Pre-defined format structure that describes a set of staged data to access or lo
 A Snowflake object that stores a generated identity and access management (IAM) entity for your external cloud storage, along with an optional set of allowed or blocked storage locations. This option enables users to create stages and load and unload data without avoid supplying credentials.
 * Account-level object
 * A single storage integration can support multiple external stages
+
+## Warehouse ##
+Warehouses are the compute part of the Snowflake engine. They are a set of virtual machines provided at runtime to help execute a given query.
+
+## Resource Monitor ##
+See [Resource Monitors](../VirtualWarehouses/ResourceMonitors.md)
 
 ## Sequence ##
 > [Using Sequences](https://docs.snowflake.com/en/user-guide/querying-sequences)

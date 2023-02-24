@@ -8,7 +8,8 @@
 * [Overview](Overview/Overview.md)
 * [Snowflake Editions](Overview/Editions.md)
 * [Architecture](Overview/Architecture.md)
-* [Objects](Overview/Objects.md)
+* [Object Model](Overview/ObjectModel.md)
+  * [Organizations, Accounts, Databases And Schemas](Overview/OrganizationsAccountsDatabasesAndSchemas.md)
 * [Data Sharing](Overview/DataSharing.md)
 * [Pricing](Overview/Pricing.md)
 
