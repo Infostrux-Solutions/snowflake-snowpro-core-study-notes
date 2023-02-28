@@ -8,6 +8,7 @@
 * Infrastructure: handled by cloud providers
 
 ## Snowflake Operational Controls ##
+> [Snowflake’s Security & Compliance Reports](https://www.snowflake.com/snowflakes-security-compliance-reports/)
 * NIST 800-53
 * SOC2 Type 2
 * SOC1 Type II

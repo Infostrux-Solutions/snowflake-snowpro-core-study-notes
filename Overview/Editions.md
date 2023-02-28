@@ -64,7 +64,8 @@ Offers even higher levels of data protection to support the needs of organizatio
   * Database Failover and Fallback for business continuity (e.g. replication with failover and fallback accross regions)
   * AWS PrivateLink support
   * Tri-Secret Secure encryption using customer-managed keys (AWS)
-* Enhanced security
+* Enhanced security, see: [Snowflake’s Security & Compliance Reports](https://www.snowflake.com/snowflakes-security-compliance-reports/)
+
   * HIPPA (Health Insurance Portability and Accountability Act) support / HITRUST
   * PCI (PCI-DSS)
   * ISO/IEC 27001
