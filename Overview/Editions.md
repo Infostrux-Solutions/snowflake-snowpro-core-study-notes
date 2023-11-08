@@ -1,4 +1,5 @@
 # Snowflake Editions #
+[Feature / Edition Matrix](https://docs.snowflake.com/en/user-guide/intro-editions#feature-edition-matrix)
 
 The Snowflake Editions determine what features are available to the customer and what level of service they require. The Snowflake Edition affects the amount charged for compute and data storage. 
 
@@ -45,12 +46,11 @@ Designed specifically for the needs of large-scale enterprises and organizations
     * you can also detokenize it using masking policies
     * useful for sensitive data like passwords, etc.
 * Search Optimization Service 
-* Dynamic Data Masking 
 * Annual rekey of all encrypted data
 
 ### SPECIFICS ###
 * No query statement encryption
-* No Failover/Fallback (some study materials disagree on the avialability of Failover)
+* No Failover/Fallback
 * No Tri-Secret Secure encryption
 * No AWS PrivateLink support
 
