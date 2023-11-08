@@ -41,40 +41,33 @@ Snowflake's unique architecture consists of three layers, all of them with High 
 * Each Warehouse is isolated from others and can be configured individually
 
 ### Cloud Services Layer ###
-Also known as the Global Services Layer, it is a collection of highly available and scalable services that coordinate activities across Snowflake. The Cloud Services Layer is shared between accounts (other than accounts setup with a Virtual Private Snowflake Edition). It includes:
-  * Authentication and access control
-  * Infrastructure management
-  * Transaction management (ACID compliant)
-  * Metadata management
-  * Query parsing and optimization
-  * Security - data encryption and key rotation
-
-## Cloud Services Layer ##
-
-* Manages all activity across Snowflake
+Also known as the Global Services Layer, it is a collection of highly available and scalable services that manages all activities across Snowflake. The Cloud Services Layer is shared between accounts (other than accounts setup with a Virtual Private Snowflake Edition)
+* Security
+  * Authentication
+  * Access Control
+    * Roles and Users
+    * Shares
+  * data encryption and key rotation
+* Infrastructure management
+  * Compute
   * Centralized storage
     * Micropartitions
     * Micropartition versioning for Time Travel
-  * Compute
-  * Metadata and Statistics collected and kept up-to-date
-  * Handles queries that depend on Metadata only (no Warehouse required), e.g.:
-    * Retrieve or modify the session context
-    * Retrieve metadata about objects (users, warehouses, databases)
-    * Get statistics, e.g.: `MIN` and `MAX` of a column, `COUNT`, number of `NULL`s
-    * DDL retrieval
-  * Time Travel and Cloning
-  * Security
-    * Authentication
-    * Access Control
-      * Roles and Users
-      * Shares
-    * Encryption Key Management
-  * Transactions
+* Transaction management (ACID compliant)
+* Query parsing and optimization
   * SQL Optimization
     * Cost-based
     * Automatic `JOIN` order optimization (no hints required)
     * Automatic statistics gathering
     * Data Pruning based on the metadata and statistics
-  * Availability
-  * Transparent online updates and patches
+  * Processing is delegated to a Virtual Warehouse
+  * The Cloud Services Layer also handles queries that depend on Metadata only (no Warehouse required), e.g.:
+    * Retrieve or modify the session context
+    * Retrieve metadata about objects (users, warehouses, databases)
+    * Get statistics, e.g.: `MIN` and `MAX` of a column, `COUNT`, number of `NULL`s
+    * DDL retrieval
+* Metadata and Statistics collected and kept up-to-date
+* Time Travel and Cloning
+* Availability
+* Transparent online updates and patches
 * Runs on Snowflake-managed compute
