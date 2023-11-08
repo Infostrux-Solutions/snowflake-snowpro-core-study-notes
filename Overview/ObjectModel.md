@@ -2,7 +2,7 @@
 * All objects in Snowflake are securable - privileges on objects can be granted to Roles and Roles are granted to Users.
 * Additionally, all objects can be interacted with and configured via SQL given the user has sufficient privileges.
 
-* Other than the Organization and Account objects, objects can be at the Account level or the Schema level
+* Other than the Organization and Account objects, objects can be at the Account level or the Schema level. Examples:
   * Account level objects:
     * Network Policy
     * User
@@ -27,7 +27,7 @@
     * Pipe
 
 > * Note that object identifiers are case insensitive and cannot contain spaces or special characters unless they are enclosed in quotes.
-> * When an object identifier is enclosed in quotes, it becomes case sensitive!
+> * When an object identifier is enclosed in quotes, it becomes case sensitive. This should be avoided as it can contribute to hard to debug issues!
 
 ![](../images/SecurableObjectsHierarchy.png)
 
@@ -35,15 +35,15 @@
 * The definitions of most objects can be retrieved using the [GET_DDL()](https://docs.snowflake.com/en/sql-reference/functions/get_ddl.html) function.
 
 ## Table ##
-Contains all the data in a database. 
+Tables hold all the data in a database. 
 
 ### Permanent ###
 * Default table type, used for the highest level of data protection and recovery
 * Persists until dropped
-* 0–90 days of Time Travel (Enterprise Edition necessary, 0–1 in Standard Edition)
+* 0–90 days of Time Travel depending on the Snowflake edition (0–1 days in Standard Edition, 0-90 days in Enterprise Edition and up)
 * 7 days of Fail-Safe
-* Can be cloned to a permanent, temporary or transient table
-  * If you clone a Permanent table to Transient or Temporary, the old partitions will remain Permanent, but the new partitions we add to this clone will be Transients/Temporary
+* Can be cloned to a permanent, transient or temporary table
+  * If you clone a Permanent table to Transient or Temporary, the old partitions will remain Permanent, but any new partitions added to the clone will be Transients/Temporary
 
 ### Transient ###
 * Persists until dropped
@@ -56,7 +56,7 @@ Contains all the data in a database.
 * Used for transitory data
 * Tied to and available only within the context a single user session. As such, they are not visible to other users or sessions
 * Time Travel: 0 or 1 days
-  * A temporary table is purged once the session ends, so the actual retention period is for 24 hours or the remainder of the session
+  * A temporary table is purged once the session ends, so the actual retention period is for 24 hours or the remainder of the session, whichever is less
 * Temporary tables incur storage costs
 * No Fail-Safe support
 * Can only be cloned to a temporary or transient table
@@ -109,7 +109,7 @@ Both Standard and Materialized views can also be defined as Secure
 ## Stage ##
 Stages in Snowflake specify where data files are stored (staged) in cloud storage. They facilitate data loading and unloading.
 * When staging uncompressed files in a Snowflake stage, the files are automatically compressed using `GZIP` unless compression is explicitly disabled
-* Snowflake automatically generates metadata for staged files. This metadata is “stored” in the following virtual columns:
+* Snowflake automatically generates metadata for staged files:
 * `METADATA$FILENAME`: stage path and name of the data file the current row belongs to
 * `METADATA$FILE_ROW_NUMBER`: row number for each record in the staged data file
 * `$[COLUMN_NUMBER]`: staged data file column number; e.g. `$1` refers to the first column in the staged file, `$2` refers to the second column, etc.
@@ -131,20 +131,19 @@ Stages in Snowflake specify where data files are stored (staged) in cloud storag
       * credentials to access the files
       * decryption keys to enable decryption of the data
 
-### Default Internal Stages ###
-The default Internal stages
+### Internal Stages ###
 * Can only be accessed using the SnowSQL CLI
-* Do not support setting file formats
 * Can be of two types: User and Table Stage
 
 #### User Stage ####
 * Each user has a Snowflake personal stage allocated to them by default
-* Represented with `@~`
+* Referenced with `@~`
 * Can only be accessed by the user it belongs to
+* User stages do not support setting file format options. Instead, you must specify file format and copy options as part of the [COPY INTO <table>](https://docs.snowflake.com/en/sql-reference/sql/copy-into-table) command.
 
 #### Table Stage ####
 * Each table has a Snowflake stage allocated to it by default
-* Represented with `@%[TABLE_NAME]`
+* Referenced with `@%[TABLE_NAME]`
 * Accessible to multiple users 
 * Files can only be loaded/unloaded to/from the table the stage belongs to
 
@@ -153,7 +152,7 @@ Pre-defined format structure that describes a set of staged data to access or lo
 * A File Format can be created as a clone from another File Format
 
 ## Storage Integration ##
-A Snowflake object that stores a generated identity and access management (IAM) entity for your external cloud storage, along with an optional set of allowed or blocked storage locations. This option enables users to create stages and load and unload data without avoid supplying credentials.
+A Snowflake object that stores a generated identity and access management (IAM) entity for your external cloud storage, along with an optional set of allowed or blocked storage locations. This option enables users to create stages and load and unload data without supplying credentials.
 * Account-level object
 * A single storage integration can support multiple external stages
 
@@ -173,7 +172,7 @@ You can access sequences in queries as expressions. The function `nextval`, will
 CREATE OR REPLACE SEQUENCE seq START = 1 INCREMENT = 5;
 CREATE OR REPLACE TABLE PEOPLE 
 (
-  ID NUMBER DEFAULT PEOPLE_SEQ.nextval, 
+  ID NUMBER DEFAULT seq.nextval, 
   NAME VARCHAR(50)
 );
 ```
@@ -204,31 +203,28 @@ Extend the system to perform operations.
 * Every `CREATE PROCEDURE` statement must include a `RETURNS` clause that defines a return type, even if the procedure does not explicitly return anything
 * Store Procedures CANNOT return a set of rows
 * Stored Procedures can be defined to run as their owner (by default) or as the procedure caller (`EXECUTE AS CALLER`)
-* Stored Procedures can be defined to run as their owner (by default) or as the procedure caller (`EXECUTE AS CALLER`)
-* Stored Procedures interact with Snowflake using an API in the respective language, e.g. JavaScript API
-  * API Objects:
-    * `Snowflake` - contains the methods of the Stored Procedure API; this object is accessible by default (there is no need to create it)
-    * `Statement` - provides method to execute a query statement and access its metadata
-    * `ResultSet` - iterable object which contains the query results;
-    * `SfDate` - wrapper around the Snowflake SQL `TIMESTAMP` data types
-  * Snowflake Stored Procedures allow migrating of other databases' stored procedures by embedding their SQL in the Snowflake Stored Procedure's API code
+* Stored Procedures interact with Snowflake using an API in the respective language. Here are some JavaScript API Objects:
+  * `Snowflake` - contains the methods of the Stored Procedure API; this object is accessible by default (there is no need to create it)
+  * `Statement` - provides method to execute a query statement and access its metadata
+  * `ResultSet` - iterable object which contains the query results;
+  * `SfDate` - wrapper around the Snowflake SQL `TIMESTAMP` data types
+* Snowflake Scripting allow migrating of other databases' stored procedures by embedding their SQL in the Snowflake Stored Procedure's code
 * Argument names in the SQL portions of a Stored Procedure are case-insensitive
 
 ## UDF: User-Defined Function ##
 > [User Defined Function](https://docs.snowflake.com/en/sql-reference/user-defined-functions.html)
 
-Extend Snowflake to perform operations that are not available through built-in, system-defined functions such as include programming constructs like branching and looping.
-.
+UDFs extend Snowflake to perform operations that are not available through built-in, system-defined functions.
 * UDFs accept 0 or more parameters.
 * For each row passed to a UDF, the UDF must return either:
   * a scalar (i.e. single) value, or
   * if defined as a `RETURNS TABLE` function, a set of zero or more rows.
     * When the UDF returns a table, it can be called a User Defined Table Function (UDTF)
 * A UDF can be written in:
+  * SQL (default)
   * Java
   * JavaScript
   * Python
-  * SQL (default support language)
 * UDFs can be secure or unsecure
 * UDFs do not support schema definitions (DDL) or data modifications (DML)
 * The returned value(s) CAN be used directly in statement SQL
