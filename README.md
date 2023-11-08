@@ -15,6 +15,7 @@
 
 ## Virtual Warehouses ##
 * [Virtual Warehouses](VirtualWarehouses/VirtualWarehouses.md)
+* [Resource Monitors](VirtualWarehouses/ResourceMonitors.md)
 
 ## Storage and Data Protection ##
 * [Data Storage Layer](StorageAndDataProtection/DataStorageLayer.md)
