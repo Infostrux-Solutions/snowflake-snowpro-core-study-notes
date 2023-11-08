@@ -27,6 +27,7 @@ Snowflake releases new features **_weekly_**
   * Security features:
     * all data encrypted at rest and in transit
     * row-based access control
+    * column-level masking
     * Multi-Factor Authentication
 * Data Science
   * Centralized storage removes data management roadblocks
