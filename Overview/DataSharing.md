@@ -11,9 +11,9 @@ Secure Data Sharing lets you share selected objects in a database in your (Provi
 
 ## Shares ##
 
-Shares are named Snowflake objects that encapsulate all of the information required to share a database
-* The privileges that grant access to the database, schemas and specific objects we want to share
-* The consumer accounts with which the database and its objects are shared.
+Shares are named Snowflake objects that encapsulate all of the information required to share database objects. Using `GRANT`s, shares encapsulate:
+* the privileges that grant access to the database, schemas and specific objects we want to share
+* the  consumer accounts that have access to the share and all  objects the share has access to.
 
 Some sample SQL:
 ```postgres-psql
@@ -22,6 +22,8 @@ CREATE SHARE myShare;
 GRANT USAGE ON DATABASE myDb TO SHARE myShare;
 GRANT USAGE ON SCHEMA myDb.public TO SHARE myShare;
 GRANT SELECT ON TABLE myDb.public.myTable TO SHARE myShare;
+-- Add consumer accounts to the share
+ALTER SHARE myShare ADD ACCOUNTS = org1.consumer1,org1.consumer2;
 
 -- Show all Shares in the account
 SHOW SHARES;
@@ -45,6 +47,7 @@ Accounts that receive the share/data.
 * Shared data does not take up any storage in the Consumer account so Consumers don’t pay for its storage
 * Time Travel is not available to Consumers on shared data
 * Zero-Copy Cloning is not available to Consumers on shared data
+* Consumers can, however, copy share data using CTAS (`CREATE TABLE ... AS SELECT`)
 
 #### Full Account Consumer ####
 * The only charges to consumers are for the compute resources (i.e. Virtual Warehouses) used to query the shared data
@@ -63,13 +66,11 @@ Accounts that receive the share/data.
   * No data movement or copying
   * Consumers immediately see all updates
   * Data can be shared with an unlimited number of Consumers
-  * Consumers can create new tables from a share
 * Shares can only be created by users
   * with the `ACCOUNTADMIN` role
   * or with a role that has been explicitly given the permission to create Shares
 * Shares can be created between accounts but not within the same account
 * Consumers cannot re-share a Share
-* Shared data cannot be cloned in the typical Snowflake zero-copy clone fashion - consumers must copy the data if they want it to exist in their own account.
 * Snowflake does not charge for creating shares although Providers can charge Consumers or Reader Accounts to monetize their data
 * Sharing is available across all [Snowflake Editions](Editions.md)
 * The Consumer and Provider accounts must be in the same cloud and region to share data
