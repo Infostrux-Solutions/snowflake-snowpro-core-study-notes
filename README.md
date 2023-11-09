@@ -63,4 +63,4 @@ Read every single “Reading Assets” article from the [[COF-C02] SnowPro Core 
 * [FullCertified: Snowflake SnowPro Core - Practice Exam 1](https://www.fullcertified.com/certification/snowflake-snowpro-core/exam/1): 100 questions
 
 #### Paid ####
-* [Udemy: [COF-C02] Snowflake SnowPro Core Certification Practice Sets](https://www.udemy.com/course/snowflake-snowpro-core-certification-exam-practice-sets/)  
+* [Udemy: [COF-C02] Snowflake SnowPro Core Certification Practice Sets](https://www.udemy.com/course/snowflake-snowpro-core-certification-exam-practice-sets/)
