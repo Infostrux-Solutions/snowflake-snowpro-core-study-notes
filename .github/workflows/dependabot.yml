@@ -15,13 +15,13 @@ jobs:
         id: metadata
         uses: dependabot/fetch-metadata@v1.4.0
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: "${{ secrets.CI_TOKEN }}"
       - name: Enable auto-merge for Dependabot PRs
         if: ${{contains(steps.metadata.outputs.dependency-names, 'Snowflake-Labs/snowflake') && steps.metadata.outputs.update-type == 'version-update:semver-minor'}}
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.CI_TOKEN}}
       - name: Approve a PR
         run: gh pr review --approve "$PR_URL"
         env:
