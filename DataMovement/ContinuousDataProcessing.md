@@ -9,18 +9,17 @@ A Task is a way to run a **single SQL statement** on schedule without having to 
 * Procedural logic using [Snowflake Scripting](https://docs.snowflake.com/en/developer-guide/snowflake-scripting/index)
 
 ### Task Features ###
-* Tasks can be queued based on the outcome of other Tasks to for DAGs
-  * the Root task will be the only one to which the scheduler is set
-  * The root task can have a queuing time in case something else is already in the warehouse
-  * Child tasks will always have a queuing time.
-  * the children’s tasks only run after the parent's task finishes
-  * Each task can have a maximum of 100 children tasks
-  * A tree of tasks can have a maximum of 1000 tasks, including the root one
+* Tasks can be queued based on the outcome of other Tasks to form DAGs
+  * the Root task is the only one which can be scheduled
+  * the root task can be queued in case the warehouse is currently busy with another workload
+  * child tasks are always queued - they only run after the parent task finishes
+  * each task can have a maximum of 100 children tasks
+  * a tree of tasks can have a maximum of 1000 tasks, including the root one
   * each non-root task can have dependencies on multiple predecessor tasks, up to 100 predecessors
-  * if we eliminated the predecessor task, there are two options:
-    * Child task becomes a standalone task
-    * Child task becomes a root task
-  ```postgres-psql
+  * if a predecessor task is dropped, there are two options:
+    * its child task becomes a standalone task
+    * its child task becomes a root task
+  ```
   -- Create a child task
   CREATE TASK <newTask> AFTER <rootTask>;
   ALTER TASK <newTask> ADD AFTER <rootTask>;
@@ -33,11 +32,11 @@ A Task is a way to run a **single SQL statement** on schedule without having to 
 * Tasks are initially created in the suspended state
   * they can be started/resumed with `ALTER TASK <task_name> RESUME;`
 * Tasks execute with the privileges of the owning Role
-  * if the owner role of a task is deleted, task ownership is reassigned to the role that dropped the role
+  * if the owner role of a task is dropped, task ownership is reassigned to the role that dropped the owner role
 * Tasks cannot be triggered manually
 * Snowflake ensures only one instance of a task with a schedule is executed at a given time
-  * if a task is still running when the next scheduled execution time occurs, that scheduled time is **skipped**.
-* Tasks also have a maximum duration of 60 minutes by default
+  * if a task is still running when the next scheduled execution time occurs, that scheduled time is **SKIPPED**.
+* Tasks have a maximum duration of 60 minutes by default
 
 ### Task Compute Resources ###
 Tasks require compute resources to execute SQL code. When a task is being created, the user has the choice to opt for using their own Virtual Warehouse or let Snowflake use serverless compute:
@@ -56,7 +55,7 @@ ORDER BY scheduled_time;
 ```
 
 ## Streams ##
-Streams (also known as Table Streams) are Snowflake objects that record DML changes (INSERTS, UPDATES, and DELETES) made to tables, views and secure views. They also store metadata about each change. A Stream can be created on a table and used for CDC (Change Data Capture) to identify and act on changed records.
+Streams (also known as Table Streams) are Snowflake objects that store metadata about DML changes (`INSERT`, `UPDATE`, `DELETE`) made to tables, views and secure views. A Stream can be created on a table and used for CDC (Change Data Capture) to identify and act on changed records.
 
 When created, a table stream logically takes an initial snapshot of every row in the source table by initializing a point in time (called an offset) as the current transactional version of the table. The stream then records the DML changes after this snapshot was taken.
 

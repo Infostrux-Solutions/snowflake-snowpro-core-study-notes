@@ -2,7 +2,7 @@
 
 The Data Storage Layer is Snowflake managed cloud-based storage available in the major cloud providers (AWS, Azure and GCP).
 * Full native support for semi-structured data: JSON, AVRO, ORC, XML and Parquet
-* Customers are billed for data based on its compressed size as well as any files existing in Snowflake stages
+* Customers are billed for data based on its compressed size as well as any files existing in internal (Snowflake-managed) stages
 
 ## Micro-Partitions ##
 All data in Snowflake tables is automatically divided into micro-partitions. Micro-Partitions are contiguous units of storage that generally hold a maximum of 16MB or encrypted, compressed data (uncompressed the data is between 50-500MB), organized in a columnar way.

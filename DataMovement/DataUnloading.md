@@ -1,12 +1,12 @@
 # Data Unloading #
 
-Similar to [Bulk Loading](BulkLoading.md), unloading uses the `COPY INTO` command to unload data to the local filesystem or to the cloud. The difference is that, when unloading, we would
+Similar to [Bulk Loading](BulkLoading.md), unloading uses the `COPY INTO` command to unload data to an internal or external stage. The difference is that, when unloading, we would
 ```sql
 COPY INTO <stage> FROM <table>;
 ```
 
 ## Unloading to Local Storage on a Client Machine ##
-Use the `GET` command to DOWNLOAD files from a Snowflake INTERNAL STAGE (named internal stage, user stage, or table stage) to a local directory/folder on a client machine:
+If data has been unloaded to a Snowflake INTERNAL STAGE (named internal stage, user stage, or table stage), you can use the `GET` command to DOWNLOAD the files to a local directory/folder on a client machine:
 ```iso92-sql
 GET @my_int_stage file:///tmp/data/;
 ```
@@ -31,7 +31,7 @@ GET @my_int_stage file:///tmp/data/;
 * You can use the `LIST` and `REMOVE` commands to manage files in stages.
 * `SELECT` queries in the `COPY INTO` statement support the full SQL syntax which allows complex transformations on data egress, e.g. `JOIN`-ing data from multiple tables, perform aggregations, ordering and filtering, etc.
 
-## Empty Strigs vs. Null Values Options ##
+## Empty Strings vs. Null Values Options ##
 * `FIELD_OPTIONALLY_ENCLOSED_BY` - specify the character to use to enclose your fields
 * `EMPTY_FIELD_AS_NULL` - convert empty fields into `NULL`, the default is `FALSE`
 * `NULL_IF` - convert `NULL` values to something else

@@ -19,9 +19,8 @@ MCWs can automatically `SCALE OUT/IN` by spawning (or shutting down) additional 
 ## SCALE UP/DOWN: Resizing Warehouses ##
 A Virtual Warehouse can `SCALE UP/DOWN` (be resized), manually, at any time, even while running
   * used for handling complex, long-running queries or ingesting large data sets
-  * running queries will complete at the current size
-  * queued and new queries run at the new size
-  * Efficient scale up/down should give approximately linearly proportionate results, e.g. running a query on a query with a double size should cut the query run time in half.
+  * when resized while running, currently executing queries will complete at the current size; queued and new queries will execute at the new size
+  * Efficient scale up/down should give approximately linearly proportionate results, e.g. running a query on a double-sized warehouse should cut the query run time in half.
   * It is recommended to keep queries and workloads of similar complexity and with similar compute demands on the same warehouse to simplify compute resource size management
   * Resizing can be included in SQL scripts so a warehouse can be scaled up/down depending on the demands of subsequent queries
 
@@ -29,7 +28,7 @@ A Virtual Warehouse can `SCALE UP/DOWN` (be resized), manually, at any time, eve
 * One can create an unlimited number of warehouses in their account.
 * XS (Extra Small) is the smallest size of VW with one server per cluster.
   * each size up doubles the number of servers in the cluster as well as the number of Snowflake credits consumed
-  * sizes range from XS, through S, M, L, XL, 2XL up to 6XL
+  * sizes range from XS, through S, M, L, XL, 2XL up to 6XL (currently)
     * the default size for warehouses created through the web interface is XL
     * the default size for warehouses created using SQL is XS
     * 5XL and 6XL warehouses are generally available in AWS regions, and in preview in US Government and Azure regions.
@@ -42,13 +41,13 @@ A Virtual Warehouse can `SCALE UP/DOWN` (be resized), manually, at any time, eve
   * Auto-resume is enabled by default 
   * A VW will automatically start when first created
   * In SQL a VW can be created in suspended mode by setting the `INITIALLY_SUSPENDED = TRUE` option
-* When a VW is first created, it has, by default, the USAGE permission granted to the role that creates it
+* When a VW is first created, it has, by default, the USAGE permission granted to the role that owns/creates it since ownership defaults to the object creator
  
 ## Compute Credits ##
-* Customer-created compute is charged per second with a 60-second minimum each time the warehouse starts
-* Snowflake-created serverless (background) compute is charged per second with no minimum
-  * These are request that can be handled without a VW, e.g.: `SHOW` commands, DDL commands, etc.
-* Credit cost can vary depending on cloud provider and region
+> For more info, see [Understanding Compute Cost](https://docs.snowflake.com/en/user-guide/cost-understanding-compute)
+* Customer-managed compute is charged per second with a 60-second minimum each time the warehouse starts
+* Snowflake-created serverless (background) compute is charged per second with no minimum.
+* Credit cost varies depending on cloud provider and region
 * One server in the VW cluster uses one credit per hour, so, for example, an XS (1 server) will use one credit per hour while a large (8 servers) will use 8 credist per hour
 
 ### Cloud Services Compute Billing ###
@@ -61,4 +60,4 @@ A transaction is a sequence of SQL statements that are committed or rolled back 
 * If a session is disconnected for whatever reason and a transaction remains in a detached state which cannot be committed or rolled back, Snowflake takes 4 hours to abort a transaction and roll it back.
 * You can abort a running transaction with the system function `SYSTEM$ABORT_TRANSACTION `
 * Each transaction has independent scope
-* Snowflake does not support Nested Transactions, although it supports Nested Procedure calls
+* Snowflake does not support nested Transactions, although it supports nested Stored Procedure calls

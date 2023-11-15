@@ -1,21 +1,22 @@
 # Bulk Loading #
 
-Bulk load is the process of loading batches of data from files already available at any stage into Snowflake tables.
+Bulk load is the process of loading batches of data from files available in a stage into Snowflake tables.
+
 * You need to specify the table name where you want to copy the data, the stage where the files are, the file/patterns you want to copy, and the file format
 * Bulk loading uses a transactional boundary control which wraps each `COPY INTO` command into an individual transaction that can be rolled back if errors are encountered
-* The information about the loaded files is stored in Snowflake metadata. You cannot COPY the same file again in the next 64 days unless you specify it (“FORCE=True” command)
+* The information about the loaded files is stored in Snowflake's metadata. You cannot COPY the same file again in the next 64 days unless you force it with the `FORCE = True` option
   * Renaming a previously ingested file in the stage does not modify the metadata so the file won't be re-ingested with the next `COPY INTO` command
 * Bulk loading uses user-managed compute resources (Virtual Warehouses) which affect the processing time and cost of data loading.
-* It supports data transformation while loading, using column reordering, column omission, casting, etc.
+* Some data transformations can be performed during data load, e.g. column reordering, column omission, type casting, etc.
   * some transformations like Flatten, Join, Group by, Filters or Aggregations are not supported.
-* You cannot Load/Unload files from your Local Drive, they need to be staged first
-* Using the Snowflake UI, you can only Load 50MB files. You can copy bigger files using SnowSQL
+* You cannot Load/Unload files from your Local Drive, they need to be staged (`PUT`) or downloaded (`GET`) first
+* Using the Snowflake UI, you can only load files up to 50MB. You can copy bigger files using SnowSQL.
 * Organizing input data by granular path can improve load performance
 
 ## Staging ##
 
 ### Staging from a Local Storage on a Client Machine ###
-We can use the `PUT` command to UPLOAD files from a local directory/folder on a client machine into an INTERNAL STAGE (named internal stage, user stage, or table stage):
+We can use the `PUT` command to UPLOAD files from a local directory/folder to an INTERNAL STAGE (named internal stage, user stage, or table stage):
 ```iso92-sql
 PUT file:///tmp/data/mydata.csv @my_int_stage;
 ```
@@ -30,13 +31,13 @@ PUT file:///tmp/data/mydata.csv @my_int_stage;
 * If no stage was created, you will need to provide the location, credentials and decryption keys for each `COPY INTO` command.
 
 ## COPY INTO Command ##
-The `COPY INTO` command is used to load the data from staged files an existing table. Snowflake will automatically load all files in the stage which have not been previously loaded
+The `COPY INTO` command is used to load the data from staged files to an existing table. Snowflake will automatically load all files in the stage matching the query parameters which have not been previously loaded
 * Metadata on which files have been loaded is kept around for about 64 days.
 > BEST PRACTICE: Files should not be kept in a stage for longer than 64 days
 
-If you want to load files regardless whether they were loaded before, you can use:
-* `FILES = ('<file_name>'[, '<file_name>'][, ...])` - comma-separated list of files to load
-* `PATTERN = '<regex_pattern>'` - match the files to be loaded
+When loading files, you can:
+* name the files explicitly, e.g `FILES = ('<file_name>'[, '<file_name>'][, ...])`
+* provide a pattern to match the files to be loaded: `PATTERN = '<regex_pattern>'`
 
 Other options:
 * `FILE_FORMAT` - must be specified unless a file format has already been attached to the stage or the table

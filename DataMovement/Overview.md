@@ -11,11 +11,11 @@ Factors which affect loading times are
 * the number and types of columns
 
 You can both load and unload data into tables with the `COPY` command
-* LOAD: copy data from the stages into a Snowflake table 
-* UNLOAD: co;y data from a table to a stage, or external location
+* LOAD: copy data from a stage into a Snowflake table 
+* UNLOAD: copy data from a table to a stage
 
 ## File Formats ##
-A named object that lives inside a `SCHEMA` which defines the format information required for Snowflake to interpret a file. You can specify different parameters, for example, the file’s delimiter, if you want to skip the header or not, etc.
+A schema-level named object which defines the format information required for Snowflake to interpret a file. You can specify different parameters, for example, the file’s delimiter, if you want to skip the header or not, etc.
 
 | Format  | Type            | Load | Unload | Binary Format |
 |---------|-----------------|------|--------|---------------|
@@ -30,7 +30,7 @@ A named object that lives inside a `SCHEMA` which defines the format information
   * It’s the fastest file format to load data
   * May need to specify `FIELD_DELIMITER`, `RECORD_DELIMITER` and whether the file header should be skipped with `SKIP_HEADER`
 * Semi-structured data: JSON, Parquet, Avro, ORC, XML
-  * Semi-structured data is saved as `VARIANT` type in Snowflake tables
+  * Semi-structured data can be loaded as a `VARIANT` type in a Snowflake table
   * The maximum size for the `VARIANT` data type is 16MB
   * it can be queried using JSON notation, see [Query Semi-Structured Data](../SemiStructuredData/QuerySemiStructuredData.md)
 * File Format has to be specified for every `COPY INTO` command

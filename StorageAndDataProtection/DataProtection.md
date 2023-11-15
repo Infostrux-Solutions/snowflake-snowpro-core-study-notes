@@ -23,7 +23,7 @@
     * have their own security
     * are on separate power grids
     * have their own individual power backups
-* This allows fully transparent online updates and patches with no maintenance downtime windows
+* Snowflake performs fully transparent online updates and patches with no maintenance downtime windows
 
 ## Snowflake-specific Data Security Features ##
 
@@ -45,7 +45,7 @@ Access historical data at any point of time within a defined retention time peri
   * Access the previous state of a table with [AT or BEFORE](https://docs.snowflake.com/en/sql-reference/constructs/at-before.html)
     * Query the data in its previous state
     * Clone a DB/Schema/Table from its preivous state
-    ```iso92-sql
+    ```
     -- by Timestamp
     SELECT * 
     FROM my_table
@@ -73,9 +73,10 @@ Enables taking a quick snapshot of a DB/schema/table.
 * Usage
   * often used to quickly spin up a Dev or Test environment as a zero-copy clone of Production
   * can be used to create backups or data snapshots at given points of time
-  * can be used to create read-only, read-only snapshots for reporting as of a given point of time, e.g.: month-, year-end, etc.
+  * can be used to create read-only snapshots for reporting as of a given point of time, e.g.: month-, year-end, etc.
 * Some considerations:
   * Privileges are not cloned
+  * Data History is not cloned
   * Stages cloning
     * Named Internal Stages are not cloned
     * External Stages are cloned
@@ -83,7 +84,6 @@ Enables taking a quick snapshot of a DB/schema/table.
   * Pipes cloning: pipes that reference
     * internal stages are not cloned
     * external stages are cloned 
-  * Data History is not cloned.
 * Privileges required for cloning objects:
   * Table: `SELECT`
   * Pipe, Stream, Task: `OWNERSHIP`
@@ -94,9 +94,8 @@ Non-configurable, 7-day retention for historical data after the Time Travel expi
 * Only accessible by Snowflake support personnel
 * Fail-safe cannot be disabled
 * Admins can view Fail Safe storage use in the Web UI under `Account > Billing & Usage`
-* Available only for Permanent tables. Not supported for Temporary, Transient or External tables
+* Only permanent tables have a Fail-Safe period. Not supported for Temporary, Transient or External tables
 * Adds to storage costs for maintaining the additional historical data
-* Only permanent tables have a Fail-Safe period
 
 ### Snowflake replication features ###
 Snowflake provides customers with additional replication features, over and above the cloud providers' replication across availability zones.
