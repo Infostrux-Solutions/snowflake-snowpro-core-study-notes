@@ -22,7 +22,7 @@
 * Only one active network policy per account
 * Must be `ACCOUNTADMIN` or `SECURITYADMIN` to configure
 * `ALLOWED_IP_LIST` is required, `BLOCKED_IP_LIST` is optional
-```iso92-sql
+```
 -- Create a network policy
 CREATE NETWORK POLICY <policy_name>
   ALLOWED_IP_LIST = (<ip_address_or_range>, ...)
@@ -34,7 +34,7 @@ ALTER ACCOUNT SET NETWORK_POLICY = <policy_name>;
 
 ## User-Level Network Policies ##
 If a user-level policy is assinded to a logged-in user, they are prevented from executing further queries
-```iso92-sql
+```
 ALTER USER <username> SET NETW0RK_POLICY = <policy_name>;
 ```
 

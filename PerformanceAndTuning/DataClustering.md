@@ -1,7 +1,7 @@
 # Data Clustering #
 
 ## Clustering ##
-Typically, data stored in tables is sorted along natural dimensions, for example, by date. This process is called clustering.  Data that is not sorted/clustered may hurt queries performance, particularly on huge tables.
+Typically, data stored in tables is sorted along natural dimensions, for example, by date. This process is called clustering.  Data that is not sorted/clustered may hurt query performance, particularly on huge tables.
 
 The Cloud Services Layer collects clustering metadata for the micro-partitions in a table:
 * The number of micro-partitions that comprise the table.
@@ -30,9 +30,15 @@ Clustering depth measures the average number of overlapping micro-partitions for
 
 Snowflake provides periodic & automatic re-clustering to maintain optimal clustering. When the ingestion-order natural clustering is not advantageous or has degraded due to extensive `INSERT` operations, Snowflake provides a mechanism for its customers to override its natural clustering algorithms by defining clustering keys. This will result in like data (by key) being co-loaded in the same micro-partitions.
 
-Snowflake only reclusters a clustered table if it will benefit from the operation. It monitors and evaluates the tables to determine whether they would benefit from reclustering, and automatically reclusters them, as needed. In most cases, no tasks are required to enable Automatic Clustering for a table. 
+Snowflake only reclusters a clustered table if it will benefit from the operation. It monitors and evaluates the tables to determine whether they would benefit from reclustering, and automatically reclusters them, as needed. In most cases, no tasks are required to enable Automatic Clustering for a table.
 
-```iso92-sql
+Automatic clustering can be suspended and resumed:
+  ```
+  ALTER TABLE t1 [SUSPEND|RESUME] RECLUSTER;
+  ```
+
+## Clustering Keys ##
+```
 CREATE|ALTER TABLE ...
 CLUSTER BY (<column_or_expression>, ...)
 ```
@@ -43,10 +49,6 @@ CLUSTER BY (<column_or_expression>, ...)
   * A small enough number of distinct values to allow Snowflake to effectively group rows in the same micro-partitions.
 * Expressions such as `DATE()` or `TRUNC()` can be used for the clustering keys on columns with high cardinality, e.g. `TIMESTAMP` or hash strings, etc.
 * Snowflake maintains and updates the clustering order in the background which incurs compute and storage costs as micropartitions need to be rewritten
-* Automatic clustering can be suspended and resumed:
-  ```iso92-sql
-  ALTER TABLE t1 [SUSPEND|RESUME] RECLUSTER;
-  ```
 * Typically, clustering keys are added after ingestion, and/or when natural clustering has degraded.
 * Cluster Keys are placed on columns usually used in `WHERE`, `JOIN` and `ORDER BY` clauses
 

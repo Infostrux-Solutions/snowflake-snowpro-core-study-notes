@@ -7,7 +7,7 @@ COPY INTO <stage> FROM <table>;
 
 ## Unloading to Local Storage on a Client Machine ##
 If data has been unloaded to a Snowflake INTERNAL STAGE (named internal stage, user stage, or table stage), you can use the `GET` command to DOWNLOAD the files to a local directory/folder on a client machine:
-```iso92-sql
+```
 GET @my_int_stage file:///tmp/data/;
 ```
 * You cannot use the `GET` command from the Snowflake Web UI, you will need to use SnowSQL

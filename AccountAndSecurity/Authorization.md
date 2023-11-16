@@ -46,7 +46,7 @@ In addition to the default Roles, `USERADMIN` (or a user with the `CREATE ROLE` 
   * An exception to this rule of thumb is if the custom roles work with highly sensitive information.
 
 ### Role Commands ###
-```iso92-sql
+```
 -- Create a new Role
 CREATE ROLE <NEW_ROLE>;
 
@@ -74,7 +74,7 @@ SHOW GRANTS OF ROLE <ROLE>;
   * Only authorized users can see the view or UDF definition
   * bypass some of the optimizations to achieve better security so they are not as efficient
 * Row-level access - uses `CURRENT_ROLE()` or `CURRENT_USER()` to provide row-level security, e.g.
-  ```iso92-sql
+  ```
   SELECT ...
   FROM data_table
   JOIN auth_table

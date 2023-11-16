@@ -1,7 +1,8 @@
 # Load and Unload Semi-Structured Data #
 
 ## Create File Format ##
-```iso92-sql
+> [CREATE FILE FORMAT](https://docs.snowflake.com/en/sql-reference/sql/create-file-format)
+```
 CREATE FILE FORMAT <file_format_name>
 TYPE = { JSON | AVRO | ORC | PARQUET | XML }
 [<format_options>];
@@ -37,7 +38,7 @@ TYPE = { JSON | AVRO | ORC | PARQUET | XML }
 
 ### Load Options for JSON Data ###
 Load the file with no parsing or transformations into a `VARIANT` column:
-```iso92-sql
+```
 COPY INTO table_name
 FROM <file(s) in stage>
 FILE_FORMAT = (FORMAT_NAME = <JSON format with options>);
@@ -74,7 +75,7 @@ FILE_FORMAT = (FORMAT_NAME = <JSON format with options>);
 
 ### Load Options for Parquet Data ###
 Load the file with no parsing or transformations into a `VARIANT` column:
-```iso92-sql
+```
 COPY INTO table_name
 FROM <file(s) in stage>
 FILE_FORMAT = (FORMAT_NAME = <parquet format with options>);
@@ -95,7 +96,7 @@ FILE_FORMAT = (FORMAT_NAME = <parquet format with options>);
 ## Loading MATCH_BY_COLUMN_NAME Option ##
 * Load semi-structured data directly into columns of a table the names of which match the names of the high-level keys present in the data
 * Supported for JSON, AVRO, ORC and Parquet file formats
-```iso92-sql
+```
 COPY INTO table_name
 FROM <file(s) in stage>
 FILE_FORMAT = (FORMAT_NAME = <file format>)

@@ -15,16 +15,16 @@ The Cloud Services Layer accepts SQL requests from users, coordinates queries, m
 * No data is scanned from the Storage Layer and no compute is required so no computing credits are charged for cached results
 * Cached query results do NOT incur Storage costs
 * You can disable the Query Result cache with this command:
-  ```iso92-sql
+  ```
   ALTER SESSION SET USE_CACHED_RESULT = FALSE
   ```
 
 ## Warehouse Cache ##
-The actual SQL is executed across the nodes of a Virtual Data Warehouse. This layer holds a cache of the data queried, and is often referred to as Local Disk I/O although in reality this is implemented using SSD storage.
+The actual SQL is executed across the nodes of a Virtual Data Warehouse. This layer holds a cache of the micro-partition data queried, and is often referred to as Local Disk I/O although in reality this is implemented using SSD storage.
 * All data in the compute layer is temporary, and only held as long as the virtual warehouse is active.
 * Suspending or resizing a warehouse will clear the data cache
   * A low Auto-Suspend setting (e.g. auto-suspend after 1 minute) minimizes the use of the Warehouse data cache
   * A resized Warehouse (up or down) starts with a cold (clear) cache 
 * You can get information on how much data is read from Local (Warehouse) storage vs. Remote (Storage layer) by inspecting the query profile's "Scanned Bytes" metric.
-* It is recommended to use dedicated Virtual Warehouses for specific workloads. For example, a Virtual Warehouse for BI tasks, another for Data Science, etc. There is a chance that data cached by the warehouse for similar queries can can be re-used
+* It is recommended to use dedicated Virtual Warehouses for similar workloads. For example, a Virtual Warehouse for BI tasks, another for Data Science, etc. There is a chance that data cached by the warehouse for similar queries can can be re-used
 * The larger a warehouse is, the larger the warehouse cache size is

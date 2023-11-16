@@ -29,5 +29,5 @@ Typical workflow of the Snowflake query optimizer:
 
 ## Altering Query Behaviour ##
 These can be set for at the Account/Session/Role or Virtual Warehouse level:
-* `STATEMENT_TIMEOUT_IN_SECONDS`: How long a can a query run before being cancelled by the system, Default: 2 days
+* `STATEMENT_TIMEOUT_IN_SECONDS`: How long can a query run before being cancelled by the system, Default: 2 days
 * `STATEMENT_QUEUED_TIMEOUT_IN_SECONDS`:  How long can a queued query wait before being cancelled by the system, Default: 0 (forever)

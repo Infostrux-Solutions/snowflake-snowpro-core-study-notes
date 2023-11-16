@@ -17,7 +17,7 @@ Bulk load is the process of loading batches of data from files available in a st
 
 ### Staging from a Local Storage on a Client Machine ###
 We can use the `PUT` command to UPLOAD files from a local directory/folder to an INTERNAL STAGE (named internal stage, user stage, or table stage):
-```iso92-sql
+```
 PUT file:///tmp/data/mydata.csv @my_int_stage;
 ```
 * `PUT` does NOT work with external stages.

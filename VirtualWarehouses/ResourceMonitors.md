@@ -34,13 +34,13 @@ We need to specify several parameters when creating a Resource Monitor:
   * End: Date and time (i.e. timestamp) when Snowflake suspends the warehouses associated with the resource monitor, regardless of whether the used credits reached any of the thresholds defined for the resource monitor 
   * Actions/Triggers: the action to perform if a given threshold is reached within the specified interval
     * Thresholds are usually expressed as a percentage of the credit quota
-    * Notifications are send to all account administrators with notifications enabled on each action
+    * Notification are sent to all account administrators who have enabled receipt of notifications and non-administrator users in the notification list
     * Resource monitors support the following actions:
       * Notify & Suspend: send a notification and suspend all assigned warehouses after all queries in flight have completed.
       * Notify & Suspend Immediately: send a notification and suspend all assigned warehouses immediately, which cancels any queries in flight.
       * Notify: Perform no action, but send an alert notification
 
-```iso92-sql
+```
 USE ROLE accountadmin;
 
 CREATE OR REPLACE RESOURCE MONITOR limit1 WITH CREDIT_QUOT=2000
