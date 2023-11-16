@@ -18,8 +18,7 @@
 * [Resource Monitors](VirtualWarehouses/ResourceMonitors.md)
 
 ## Storage and Data Protection ##
-* [Data Storage Layer](StorageAndDataProtection/DataStorageLayer.md)
-* [Data Protection](StorageAndDataProtection/DataProtection.md)
+* [Data Storage Layer](Storage/DataStorageLayer.md)
 
 ## Data Movement ##
 * [Overview](DataMovement/Overview.md)

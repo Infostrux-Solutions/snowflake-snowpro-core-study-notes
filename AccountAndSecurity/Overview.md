@@ -3,7 +3,7 @@
 ## Security Aspects ##
 * Access: network policies
 * Authentication: Password, MFA or SSO
-* Authorization: combination of Discretionary and Role-based access control
+* Authorization: combination of Discretionary and Role Based Access Control
 * Data Protection: data encryption at rest and in motion, replication, recovery features
 * Infrastructure: handled by cloud providers
 
