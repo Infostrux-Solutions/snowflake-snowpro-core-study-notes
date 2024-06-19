@@ -1,7 +1,8 @@
 # Objects #
 * All objects in Snowflake are securable - privileges on objects can be granted to Roles and Roles are granted to Users.
 * Additionally, all objects can be interacted with and configured via SQL given the user has sufficient privileges.
-
+* To own an object means that a role (NOT USER!) has the OWNERSHIP privilege on the object.
+* Each securable object is owned by a single role, which by default is the role used to create the object.
 * Other than the Organization and Account objects, objects can be at the Account level or the Schema level. Examples:
   * Account level objects:
     * Network Policy
@@ -179,6 +180,7 @@ CREATE OR REPLACE TABLE PEOPLE
 
 ## Pipe ##
 A special type of object which enables the automatic loading of data from Stage files as soon as they are available.
+See [Snowpipe](../DataMovement/ContinuousDataLoading.md)
 
 ## Stored Procedure ##
 > [Stored Procedure](https://docs.snowflake.com/en/sql-reference/stored-procedures.html)

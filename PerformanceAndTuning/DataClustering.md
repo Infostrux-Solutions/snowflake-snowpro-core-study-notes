@@ -62,3 +62,4 @@ CLUSTER BY (<column_or_expression>, ...)
   * low `average_depth` values which indicates low micro-partition `MIN/MAX` values overlap
   * `partition_depth_histogram` with a high number of low value depths
 * You can cluster materialized views, as well as tables
+* Snowflake recommends a maximum of 3 or 4 columns (or expressions) per key.
