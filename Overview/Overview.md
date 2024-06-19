@@ -6,7 +6,7 @@
 * no management of hardware, updates and patches
 * automatic optimizations (partitioning)
 
-## Snowflake Releases ##
+### Snowflake Releases ###
 * Snowflake releases new features **_weekly_**
 * The deployments happen transparently in the background; users experience no downtime or disruption of service, and are always assured of running on the most-recent release with access to the latest features.
 
