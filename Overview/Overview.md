@@ -6,7 +6,9 @@
 * no management of hardware, updates and patches
 * automatic optimizations (partitioning)
 
-Snowflake releases new features **_weekly_**
+### Snowflake Releases ###
+* Snowflake releases new features **_weekly_**
+* The deployments happen transparently in the background; users experience no downtime or disruption of service, and are always assured of running on the most-recent release with access to the latest features.
 
 ### Data Platform Workloads ###
 * Data Warehouse
@@ -81,7 +83,7 @@ Snowflake releases new features **_weekly_**
 
 ### Fail-Safe ###
 * A data backup feature
-* Snowflake admins can recover and restore data up to 7 days after the Time Travel period expires
+* Snowflake admins can recover and restore data up to 7 days after the Time Travel period expires (not configurable)
 * Accessible only by contacting Snowflake support administrators
 * Only available for permanent tables
 * Fail-Safe incurs additional storage costs for the extra 7 days of data retention

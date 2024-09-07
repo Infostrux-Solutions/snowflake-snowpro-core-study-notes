@@ -9,11 +9,13 @@ The Metadata cache is maintained in the Cloud Services Layer and contains object
 
 ## Query Result Cache ##
 The Cloud Services Layer accepts SQL requests from users, coordinates queries, managing transactions and results and also holds the Query Results Cache
-* Holds the results of every query executed in the past 24 hours.
+* Holds the results of every query executed in the past 24 hours up to 31 days (depending on how  many times it's reused).
 * The query results are available across virtual warehouses, so cached query results returned are available to all users of the system, provided the underlying data has not changed
   * If the data in the Storage Layer changes, the caches are automatically invalidated.
 * No data is scanned from the Storage Layer and no compute is required so no computing credits are charged for cached results
 * Cached query results do NOT incur Storage costs
+* Can't have context functions (e.g. current_time())
+* Same role is used as the previous query
 * You can disable the Query Result cache with this command:
   ```
   ALTER SESSION SET USE_CACHED_RESULT = FALSE
