@@ -58,9 +58,9 @@ Read every single “Reading Assets” article from the [[COF-C02] SnowPro Core 
 ### Sample Exams ###
 
 #### Free ####
-* [ExamTopics: Snowflake SnowPro Core Exam Actual Questions](https://www.examtopics.com/exams/snowflake/snowpro-core/view/01/): 1110 questions (updated June 19, 2024)
+* [ExamTopics: Snowflake SnowPro Core Exam Actual Questions](https://www.examtopics.com/exams/snowflake/snowpro-core/view/01/): 1352 questions, only 20 available for free (updated May 26, 2025)
 Obs: There are quite a lot of ambiguous questions and the showing result might not be correct, so check the comments to be sure.
-* [FullCertified: Snowflake SnowPro Core - Practice Exam 1](https://www.fullcertified.com/certification/snowflake-snowpro-core/exam/1): 100 questions
+* [FullCertified: Snowflake SnowPro Core - Practice Exam 1](https://www.fullcertified.com/certification/snowflake-snowpro-core/exam/1): 100 questions (free for the first 30 questions only)
 
 #### Paid ####
 * [Udemy: [COF-C02] Snowflake SnowPro Core Certification Practice Sets](https://www.udemy.com/course/snowflake-snowpro-core-certification-exam-practice-sets/)  
