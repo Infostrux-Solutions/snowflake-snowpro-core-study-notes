@@ -1,5 +1,5 @@
 # These owners will be the default owners for everything in
 # the repo. Unless a later match takes precedence,
-# @Infostrux-Solutions/open-source-maintainers will be requested
+# @augustorosa will be requested
 # for review when someone opens a pull request.
-*       @Infostrux-Solutions/open-source-maintainers
+*       @augustorosa
